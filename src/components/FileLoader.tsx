@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { getObjects } from '../utils/aws-methods';
+
 import {
   S3Client,
   S3ClientConfig,
@@ -43,49 +45,23 @@ const FileLoader: React.FC = () => {
   // TODO List objects in a bucket starting with some prefix.
   const [bucketObjects, setBucketObjects] = useState<IBucketObject[]>([]);
 
-  const handleObjectList = async (token: string | undefined = undefined) => {
-    const command = new ListObjectsV2Command({
-      Bucket: BUCKET,
-      ContinuationToken: token,
-    });
-
+  const handleObjectList = async () => {
     try {
-      const response: ListObjectsV2CommandOutput = await client.send(command);
+      const resBucketObjects = await getObjects();
+      const transformedObjects = resBucketObjects.map((item) => {
+        return new BucketObject(item?.Key!, item?.LastModified?.toISOString()!);
+      });
 
-      if (response.Contents) {
-        const awsBucketObjects: IBucketObject[] = response.Contents.map(
-          (item) => {
-            return new BucketObject(
-              item.Key!,
-              item.LastModified?.toISOString()!
-            );
-          }
-        );
-
-        // This handles adding next 1000 objects
-        if (token) {
-          setBucketObjects((prevState) => [...prevState, ...awsBucketObjects]);
-        } else {
-          setBucketObjects(awsBucketObjects);
-        }
-
-        if (response.NextContinuationToken) {
-          // Recursive call to next 1000, it is async task so it should not block js
-          handleObjectList(response.NextContinuationToken);
-        }
-        return;
-      }
-
-      // No objects in the bucket so reset the state if it was not empty
-      if (bucketObjects.length) {
+      if (transformedObjects.length) {
+        setBucketObjects(transformedObjects);
+      } else {
         setBucketObjects([]);
       }
     } catch (error) {
-      // Should notify UI about failure
+      // Should notify UI
       console.log(error);
     }
   };
-
   // EO: List all objects in a bucket
 
   // Creating an object with a given name
