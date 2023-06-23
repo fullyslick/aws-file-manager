@@ -43,13 +43,10 @@ const FileLoader: React.FC = () => {
   // TODO List objects in a bucket starting with some prefix.
   const [bucketObjects, setBucketObjects] = useState<IBucketObject[]>([]);
 
-  const handleObjectList = async () => {
-    // Note it will list the first 1000 objects
-    // You should check for .NextContinuationToken
-    // https://www.codemzy.com/blog/delete-s3-folder-nodejs
-
+  const handleObjectList = async (token: string | undefined = undefined) => {
     const command = new ListObjectsV2Command({
       Bucket: BUCKET,
+      ContinuationToken: token,
     });
 
     try {
@@ -65,7 +62,17 @@ const FileLoader: React.FC = () => {
           }
         );
 
-        setBucketObjects(awsBucketObjects);
+        // This handles adding next 1000 objects
+        if (token) {
+          setBucketObjects((prevState) => [...prevState, ...awsBucketObjects]);
+        } else {
+          setBucketObjects(awsBucketObjects);
+        }
+
+        if (response.NextContinuationToken) {
+          // Recursive call to next 1000, it is async task so it should not block js
+          handleObjectList(response.NextContinuationToken);
+        }
         return;
       }
 
@@ -93,7 +100,7 @@ const FileLoader: React.FC = () => {
     setFormValues({ ...formValues, [event.target.name]: event.target.value });
   };
 
-  const handleCreateFolder = async (
+  const handleCreateObject = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
@@ -130,6 +137,8 @@ const FileLoader: React.FC = () => {
       deletedObjects = [deletedObject];
     }
 
+    console.log(deletedObjects);
+
     const command = new DeleteObjectsCommand({
       Bucket: BUCKET,
       Delete: {
@@ -150,7 +159,7 @@ const FileLoader: React.FC = () => {
   return (
     <div>
       <div>
-        <form onSubmit={handleCreateFolder}>
+        <form onSubmit={handleCreateObject}>
           <input type='text' onBlur={handleInputBlur} name='filename' />
           <textarea onBlur={handleInputBlur} name='filebody' />
           <button type='submit'>Upload File</button>
@@ -158,7 +167,7 @@ const FileLoader: React.FC = () => {
       </div>
       <div>
         Results:
-        <button onClick={handleObjectList}>List Objects</button>
+        <button onClick={() => handleObjectList()}>List Objects</button>
         <div>
           {bucketObjects.map((item) => (
             <li key={item.Key}>
