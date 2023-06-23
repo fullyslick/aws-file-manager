@@ -115,6 +115,7 @@ const FileLoader: React.FC = () => {
     try {
       const response = await client.send(command);
       console.log(response);
+      handleObjectList();
     } catch (err) {
       // Should notify UI about failure
       console.error(err);
@@ -122,22 +123,37 @@ const FileLoader: React.FC = () => {
   };
   // EO: Creating an object with a given name
 
+  const [checkedObjects, setCheckedObjects] = useState<string[] | []>([]);
+
   // Deleting objects
-  const handleObjectDelete = async (deletedObject: IBucketObject) => {
-    // recursive delete
-    const isFolder = deletedObject?.Key?.endsWith('/');
+  const handleObjectDelete = async (deletedObjectsKeys: string[]) => {
+    let subFolders: string[] = [];
+    let nextObjects: string[] = [];
 
-    let deletedObjects: IBucketObject[] | [] = [];
+    deletedObjectsKeys.forEach((delObj) => {
+      if (delObj.endsWith('/')) {
+        // Find all items in the folder
+        const result = bucketObjects
+          .filter((item) => item.Key.startsWith(delObj))
+          .map((item) => item.Key);
+        if (result.length) {
+          subFolders = [...subFolders, ...result];
+        }
+      }
+    });
 
-    if (isFolder) {
-      deletedObjects = bucketObjects.filter((bucketObject) =>
-        bucketObject?.Key?.startsWith(deletedObject?.Key!)
-      );
-    } else {
-      deletedObjects = [deletedObject];
+    deletedObjectsKeys = subFolders.length ? subFolders : deletedObjectsKeys;
+
+    let deletedObjects: { Key: string }[] = deletedObjectsKeys.map((item) => {
+      return {
+        Key: item,
+      };
+    });
+
+    if (deletedObjectsKeys.length >= 1000) {
+      nextObjects = deletedObjectsKeys.filter((delObj, index) => index >= 1000);
+      deletedObjects = deletedObjects.filter((delObj, index) => index < 1000);
     }
-
-    console.log(deletedObjects);
 
     const command = new DeleteObjectsCommand({
       Bucket: BUCKET,
@@ -148,13 +164,35 @@ const FileLoader: React.FC = () => {
 
     try {
       const response = await client.send(command);
-      console.log(response);
+
+      if (nextObjects.length) {
+        handleObjectDelete(nextObjects);
+        return;
+      }
+      handleObjectList();
     } catch (err) {
       // Should notify UI about failure
       console.error(err);
     }
   };
   // EO: Deleting objects
+  const handleCheckboxCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checkedItemKey: string =
+      event.currentTarget.getAttribute('data-item-key')!;
+
+    if (event.currentTarget.checked) {
+      setCheckedObjects((prevState) => [...prevState, checkedItemKey]);
+    } else {
+      setCheckedObjects((prevState) =>
+        prevState.filter((item) => item !== checkedItemKey)
+      );
+    }
+  };
+
+  const handleDeleteSelected = () => {
+    handleObjectDelete(checkedObjects);
+    setCheckedObjects([]);
+  };
 
   return (
     <div>
@@ -165,14 +203,24 @@ const FileLoader: React.FC = () => {
           <button type='submit'>Upload File</button>
         </form>
       </div>
+      <p>
+        <button onClick={handleDeleteSelected}>Delete Selected</button>
+      </p>
       <div>
         Results:
         <button onClick={() => handleObjectList()}>List Objects</button>
         <div>
           {bucketObjects.map((item) => (
             <li key={item.Key}>
+              <input
+                type='checkbox'
+                onChange={handleCheckboxCheck}
+                data-item-key={item.Key}
+              />
               <span>{item.Key}</span>
-              <button onClick={() => handleObjectDelete(item)}>Delete</button>
+              <button onClick={() => handleObjectDelete([item.Key])}>
+                Delete
+              </button>
             </li>
           ))}
         </div>
