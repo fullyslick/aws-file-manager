@@ -52,23 +52,30 @@ const FileLoader: React.FC = () => {
       Bucket: BUCKET,
     });
 
-    // Should try/catch that
-    const response: ListObjectsV2CommandOutput = await client.send(command);
+    try {
+      const response: ListObjectsV2CommandOutput = await client.send(command);
 
-    if (response.Contents) {
-      const awsBucketObjects: IBucketObject[] = response.Contents.map(
-        (item) => {
-          return new BucketObject(item.Key!, item.LastModified?.toISOString()!);
-        }
-      );
+      if (response.Contents) {
+        const awsBucketObjects: IBucketObject[] = response.Contents.map(
+          (item) => {
+            return new BucketObject(
+              item.Key!,
+              item.LastModified?.toISOString()!
+            );
+          }
+        );
 
-      setBucketObjects(awsBucketObjects);
-      return;
-    }
+        setBucketObjects(awsBucketObjects);
+        return;
+      }
 
-    // No objects in the bucket so reset the state if it was not empty
-    if (bucketObjects.length) {
-      setBucketObjects([]);
+      // No objects in the bucket so reset the state if it was not empty
+      if (bucketObjects.length) {
+        setBucketObjects([]);
+      }
+    } catch (error) {
+      // Should notify UI about failure
+      console.log(error);
     }
   };
 
@@ -102,6 +109,7 @@ const FileLoader: React.FC = () => {
       const response = await client.send(command);
       console.log(response);
     } catch (err) {
+      // Should notify UI about failure
       console.error(err);
     }
   };
@@ -133,6 +141,7 @@ const FileLoader: React.FC = () => {
       const response = await client.send(command);
       console.log(response);
     } catch (err) {
+      // Should notify UI about failure
       console.error(err);
     }
   };
