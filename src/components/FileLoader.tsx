@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-import { getObjects } from '../utils/aws-methods';
+import { getFolderTree, getObjects } from '../utils/aws-methods';
 import { ObjectData, ObjectDataInterface } from '../types/folder-view.types';
 
 import {
@@ -179,6 +179,17 @@ const FileLoader: React.FC = () => {
     setCheckedObjects([]);
   };
 
+  const handleGetFolderTree = async () => {
+    try {
+      const fileTree = await getFolderTree();
+
+      console.log(fileTree);
+    } catch (error) {
+      // Should notify UI about failure
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div>
@@ -192,6 +203,9 @@ const FileLoader: React.FC = () => {
         <button onClick={handleDeleteSelected}>Delete Selected</button>
       </p>
       <div>
+        <button onClick={handleGetFolderTree}>Get Folder Tree</button>
+      </div>
+      <div>
         <input type='text' ref={folderInputRef} />
         <button onClick={() => handleObjectList()}>List Objects</button>
 
@@ -199,7 +213,7 @@ const FileLoader: React.FC = () => {
           <div>
             <h2>Folders</h2>
             {foldersState.map((folder) => (
-              <li key={folder.name}>
+              <li key={folder.location}>
                 <input
                   type='checkbox'
                   onChange={handleCheckboxCheck}
@@ -218,7 +232,7 @@ const FileLoader: React.FC = () => {
           <div>
             <h2>Files</h2>
             {filesState.map((file) => (
-              <li key={file.name}>
+              <li key={file.location}>
                 <input
                   type='checkbox'
                   onChange={handleCheckboxCheck}
