@@ -179,17 +179,6 @@ const FileLoader: React.FC = () => {
     setCheckedObjects([]);
   };
 
-  const handleGetFolderTree = async () => {
-    try {
-      const fileTree = await getFolderTree();
-
-      console.log(fileTree);
-    } catch (error) {
-      // Should notify UI about failure
-      console.log(error);
-    }
-  };
-
   return (
     <div>
       <div>
@@ -202,9 +191,6 @@ const FileLoader: React.FC = () => {
       <p>
         <button onClick={handleDeleteSelected}>Delete Selected</button>
       </p>
-      <div>
-        <button onClick={handleGetFolderTree}>Get Folder Tree</button>
-      </div>
       <div>
         <input type='text' ref={folderInputRef} />
         <button onClick={() => handleObjectList()}>List Objects</button>
