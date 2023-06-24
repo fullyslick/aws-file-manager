@@ -45,29 +45,43 @@ const getS3Objects = async (prefix: string, delimiter: string = '/') => {
     folderObjects.push(...(data.CommonPrefixes ?? []));
   }
 
-  const folders = folderObjects.map(
-    (folderObj) =>
-      new ObjectData(
-        // To extract folder name from Prefix, you need remove the current prefix/folder from the string
-        // However on root level that is not required - !prefix = root
-        !prefix ? folderObj.Prefix! : folderObj.Prefix!.split('/').slice(-2)[0],
-        folderObj.Prefix!
-      )
-  );
+  if (!fileObjects.length && !folderObjects.length) {
+    throw new Error('No data was found');
+  }
 
-  let files = fileObjects.map(
-    (fileObj) =>
-      new ObjectData(
-        // To extract file name from Prefix, you need remove the current prefix/folder from the string
-        // However on root level that is not required - !prefix = root
-        !prefix ? fileObj.Key! : fileObj.Key!.split('/').splice(-1)[0],
-        fileObj.Key!
-      )
-  );
+  let folders: ObjectData[] | [] = [];
 
-  // In some cases current dir is added as first element in files array
-  // In such cases remove the first element
-  files = files[0].location === prefix ? files.slice(1) : files;
+  if (folderObjects.length) {
+    folders = folderObjects.map(
+      (folderObj) =>
+        new ObjectData(
+          // To extract folder name from Prefix, you need remove the current prefix/folder from the string
+          // However on root level that is not required - !prefix = root
+          !prefix
+            ? folderObj.Prefix!
+            : folderObj.Prefix!.split('/').slice(-2)[0],
+          folderObj.Prefix!
+        )
+    );
+  }
+
+  let files: ObjectData[] | [] = [];
+
+  if (fileObjects.length) {
+    files = fileObjects.map(
+      (fileObj) =>
+        new ObjectData(
+          // To extract file name from Prefix, you need remove the current prefix/folder from the string
+          // However on root level that is not required - !prefix = root
+          !prefix ? fileObj.Key! : fileObj.Key!.split('/').splice(-1)[0],
+          fileObj.Key!
+        )
+    );
+
+    // In some cases current dir is added as first element in files array
+    // In such cases remove the first element
+    files = files[0].location === prefix ? files.slice(1) : files;
+  }
 
   return new FolderView(folders, files);
 };
