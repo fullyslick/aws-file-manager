@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { getObjects } from '../utils/aws-methods';
+import { ObjectData, ObjectDataInterface } from '../types/folder-view.types';
 
 import {
   S3Client,
@@ -44,18 +45,27 @@ const FileLoader: React.FC = () => {
   // List all objects in a bucket
   // TODO List objects in a bucket starting with some prefix.
   const [bucketObjects, setBucketObjects] = useState<IBucketObject[]>([]);
+  const [filesState, setFilesState] = useState<ObjectData[]>([]);
+  const [foldersState, setFoldersState] = useState<ObjectData[]>([]);
+
+  const folderInputRef = useRef<HTMLInputElement>(null);
 
   const handleObjectList = async () => {
     try {
-      const resBucketObjects = await getObjects();
-      const transformedObjects = resBucketObjects.map((item) => {
-        return new BucketObject(item?.Key!, item?.LastModified?.toISOString()!);
-      });
+      const { files, folders } = await getObjects(
+        folderInputRef.current?.value
+      );
 
-      if (transformedObjects.length) {
-        setBucketObjects(transformedObjects);
+      if (files.length) {
+        setFilesState(files);
       } else {
-        setBucketObjects([]);
+        setFilesState([]);
+      }
+
+      if (folders.length) {
+        setFoldersState(folders);
+      } else {
+        setFoldersState([]);
       }
     } catch (error) {
       // Should notify UI
@@ -90,7 +100,6 @@ const FileLoader: React.FC = () => {
 
     try {
       const response = await client.send(command);
-      console.log(response);
       handleObjectList();
     } catch (err) {
       // Should notify UI about failure
@@ -183,23 +192,46 @@ const FileLoader: React.FC = () => {
         <button onClick={handleDeleteSelected}>Delete Selected</button>
       </p>
       <div>
-        Results:
+        <input type='text' ref={folderInputRef} />
         <button onClick={() => handleObjectList()}>List Objects</button>
-        <div>
-          {bucketObjects.map((item) => (
-            <li key={item.Key}>
-              <input
-                type='checkbox'
-                onChange={handleCheckboxCheck}
-                data-item-key={item.Key}
-              />
-              <span>{item.Key}</span>
-              <button onClick={() => handleObjectDelete([item.Key])}>
-                Delete
-              </button>
-            </li>
-          ))}
-        </div>
+
+        {foldersState.length !== 0 && (
+          <div>
+            <h2>Folders</h2>
+            {foldersState.map((folder) => (
+              <li key={folder.name}>
+                <input
+                  type='checkbox'
+                  onChange={handleCheckboxCheck}
+                  data-item-key={folder.location}
+                />
+                <span>{folder.name}</span>
+                <button onClick={() => handleObjectDelete([folder.location])}>
+                  Delete
+                </button>
+              </li>
+            ))}
+          </div>
+        )}
+
+        {filesState.length !== 0 && (
+          <div>
+            <h2>Files</h2>
+            {filesState.map((file) => (
+              <li key={file.name}>
+                <input
+                  type='checkbox'
+                  onChange={handleCheckboxCheck}
+                  data-item-key={file.location}
+                />
+                <span>{file.name}</span>
+                <button onClick={() => handleObjectDelete([file.location])}>
+                  Delete
+                </button>
+              </li>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
