@@ -1,13 +1,11 @@
 import React, { useState, useRef } from 'react';
 
-import { getFolderTree, getObjects } from '../utils/aws-methods';
-import { ObjectData, ObjectDataInterface } from '../types/folder-view.types';
+import { getObjects } from '../utils/aws-methods';
+import { BrowserNodesInterface } from '../types/browser.types';
 
 import {
   S3Client,
   S3ClientConfig,
-  ListObjectsV2Command,
-  ListObjectsV2CommandOutput,
   PutObjectCommand,
   DeleteObjectsCommand,
 } from '@aws-sdk/client-s3';
@@ -45,27 +43,19 @@ const FileLoader: React.FC = () => {
   // List all objects in a bucket
   // TODO List objects in a bucket starting with some prefix.
   const [bucketObjects, setBucketObjects] = useState<IBucketObject[]>([]);
-  const [filesState, setFilesState] = useState<ObjectData[]>([]);
-  const [foldersState, setFoldersState] = useState<ObjectData[]>([]);
+
+  const [browserNodes, setBrowserNodes] = useState<BrowserNodesInterface>([]);
 
   const folderInputRef = useRef<HTMLInputElement>(null);
 
   const handleObjectList = async () => {
     try {
-      const { files, folders } = await getObjects(
-        folderInputRef.current?.value
-      );
+      const s3Objects = await getObjects(folderInputRef.current?.value);
 
-      if (files.length) {
-        setFilesState(files);
+      if (s3Objects.length) {
+        setBrowserNodes(s3Objects);
       } else {
-        setFilesState([]);
-      }
-
-      if (folders.length) {
-        setFoldersState(folders);
-      } else {
-        setFoldersState([]);
+        setBrowserNodes([]);
       }
     } catch (error) {
       // Should notify UI
@@ -195,37 +185,22 @@ const FileLoader: React.FC = () => {
         <input type='text' ref={folderInputRef} />
         <button onClick={() => handleObjectList()}>List Objects</button>
 
-        {foldersState.length !== 0 && (
+        {browserNodes.length !== 0 && (
           <div>
-            <h2>Folders</h2>
-            {foldersState.map((folder) => (
-              <li key={folder.location}>
+            <h2>S3 Objects</h2>
+            {browserNodes.map((browserNode) => (
+              <li key={browserNode.path}>
                 <input
                   type='checkbox'
                   onChange={handleCheckboxCheck}
-                  data-item-key={folder.location}
+                  data-item-key={browserNode.path}
                 />
-                <span>{folder.name}</span>
-                <button onClick={() => handleObjectDelete([folder.location])}>
-                  Delete
-                </button>
-              </li>
-            ))}
-          </div>
-        )}
-
-        {filesState.length !== 0 && (
-          <div>
-            <h2>Files</h2>
-            {filesState.map((file) => (
-              <li key={file.location}>
-                <input
-                  type='checkbox'
-                  onChange={handleCheckboxCheck}
-                  data-item-key={file.location}
-                />
-                <span>{file.name}</span>
-                <button onClick={() => handleObjectDelete([file.location])}>
+                <span
+                  style={{ color: browserNode.isFolder ? 'blue' : 'black' }}
+                >
+                  {browserNode.name}
+                </span>
+                <button onClick={() => handleObjectDelete([browserNode.path])}>
                   Delete
                 </button>
               </li>
