@@ -5,7 +5,9 @@ import classes from './FolderTreeNode.module.css';
 const FolderTreeNode: React.FC<{
   folderNode: FolderNode;
   isVisible?: boolean;
-  // Should be isVisible = false by default; Context should keep track of opened nodes
+  // Should be isVisible = false by default;
+  // Context hold info about currently opened folderNode
+  // if currently opened folderNode startsWith this component "path", then this component should be visible
 }> = ({ isVisible = true, folderNode }) => {
   const { name, path, childFolders } = folderNode;
 
