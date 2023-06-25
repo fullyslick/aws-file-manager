@@ -4,6 +4,7 @@ import {
   getObjects,
   createS3Object,
   deleteS3Objects,
+  getObjectContent,
 } from '../utils/aws-methods';
 import { BrowserNodesInterface } from '../types/browser.types';
 
@@ -118,56 +119,6 @@ const FileLoader: React.FC = () => {
     }
   };
 
-  const handleObjectDelete = async (deletedObjectsKeys: string[]) => {
-    let subFolders: string[] = [];
-    let nextObjects: string[] = [];
-
-    deletedObjectsKeys.forEach((delObj) => {
-      if (delObj.endsWith('/')) {
-        // Find all items in the folder
-        const result = bucketObjects
-          .filter((item) => item.Key.startsWith(delObj))
-          .map((item) => item.Key);
-        if (result.length) {
-          subFolders = [...subFolders, ...result];
-        }
-      }
-    });
-
-    deletedObjectsKeys = subFolders.length ? subFolders : deletedObjectsKeys;
-
-    let deletedObjects: { Key: string }[] = deletedObjectsKeys.map((item) => {
-      return {
-        Key: item,
-      };
-    });
-
-    if (deletedObjectsKeys.length >= 1000) {
-      nextObjects = deletedObjectsKeys.filter((delObj, index) => index >= 1000);
-      deletedObjects = deletedObjects.filter((delObj, index) => index < 1000);
-    }
-
-    const command = new DeleteObjectsCommand({
-      Bucket: BUCKET,
-      Delete: {
-        Objects: deletedObjects,
-      },
-    });
-
-    try {
-      const response = await client.send(command);
-
-      if (nextObjects.length) {
-        handleObjectDelete(nextObjects);
-        return;
-      }
-      handleObjectList();
-    } catch (err) {
-      // Should notify UI about failure
-      console.error(err);
-    }
-  };
-
   const handleDeleteSelected = async () => {
     try {
       const response = await deleteS3Objects(checkedObjects);
@@ -182,8 +133,24 @@ const FileLoader: React.FC = () => {
       console.log(error);
     }
   };
-
   // EO: Deleting objects
+
+  // Read file
+  const readFileInputRef = useRef<HTMLInputElement>(null);
+  const [fileContent, setFileContent] = useState<string>();
+
+  const handleReadFile = async () => {
+    const fileInput = readFileInputRef.current!.value;
+
+    try {
+      const objectContent = await getObjectContent(fileInput);
+      setFileContent(objectContent);
+    } catch (error) {
+      // Inform UI
+      console.log(error);
+    }
+  };
+  // EO: Read file
 
   return (
     <div>
@@ -195,8 +162,13 @@ const FileLoader: React.FC = () => {
         </form>
       </div>
       <div>
+        <input type='text' ref={readFileInputRef} />
+        <button onClick={handleReadFile}>Read File</button>
+        {fileContent && <p>{fileContent}</p>}
+      </div>
+      <div>
         <input type='text' ref={folderInputRef} />
-        <button onClick={() => handleObjectList()}>List Objects</button>
+        <button onClick={handleObjectList}>List Objects</button>
         <p>
           <button onClick={handleDeleteSelected}>Delete Selected</button>
         </p>

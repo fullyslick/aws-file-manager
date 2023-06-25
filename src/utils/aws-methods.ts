@@ -5,6 +5,7 @@ import {
   PutObjectCommand,
   DeleteObjectsCommand,
   DeleteObjectsCommandOutput,
+  GetObjectCommand,
 } from '@aws-sdk/client-s3';
 
 import { BrowserNode } from '../types/browser.types';
@@ -218,4 +219,23 @@ export const deleteS3Objects = async (selectedObjectsKeys: string[]) => {
   await recursiveDelete(selectedObjectsKeys);
 
   return Promise.resolve(operationResponse!);
+};
+
+export const getObjectContent = async (objectKey: string) => {
+  const command = new GetObjectCommand({
+    Bucket: BUCKET,
+    Key: objectKey,
+  });
+
+  try {
+    const response = await client.send(command);
+
+    if (response.Body) {
+      const objectContent = await response.Body.transformToString();
+
+      return Promise.resolve(objectContent);
+    }
+  } catch (err) {
+    return Promise.reject(err);
+  }
 };
