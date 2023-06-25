@@ -1,6 +1,10 @@
 import React, { useState, useRef } from 'react';
 
-import { getObjects, createS3Object } from '../utils/aws-methods';
+import {
+  getObjects,
+  createS3Object,
+  deleteS3Objects,
+} from '../utils/aws-methods';
 import { BrowserNodesInterface } from '../types/browser.types';
 
 import {
@@ -164,9 +168,19 @@ const FileLoader: React.FC = () => {
     }
   };
 
-  const handleDeleteSelected = () => {
-    handleObjectDelete(checkedObjects);
-    setCheckedObjects([]);
+  const handleDeleteSelected = async () => {
+    try {
+      const response = await deleteS3Objects(checkedObjects);
+
+      if (response?.Deleted?.length) {
+        console.log(response?.Deleted?.length);
+        await handleObjectList();
+        setCheckedObjects([]);
+      }
+    } catch (error) {
+      // Inform UI
+      console.error(error);
+    }
   };
 
   // EO: Deleting objects

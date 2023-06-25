@@ -133,7 +133,6 @@ export const createS3Object = async (
   objectName: string,
   objectContent?: string
 ) => {
-  // Add empty body and Key: filename = "myfolder/" to create empty folder
   const command = new PutObjectCommand({
     Bucket: BUCKET,
     Key: objectName,
@@ -143,6 +142,74 @@ export const createS3Object = async (
   try {
     const response = await client.send(command);
 
+    return Promise.resolve(response);
+  } catch (err) {
+    // Should notify UI about failure
+    console.error(err);
+  }
+};
+
+export const deleteS3Objects = async (deletedObjectsKeys: string[]) => {
+  try {
+    const deletedObjectsContent = await Promise.all(
+      deletedObjectsKeys.map((deletedObjectKey) =>
+        getS3Objects(deletedObjectKey, '')
+      )
+    );
+
+    const deletedObjectsContentFlattened = deletedObjectsContent
+      .map((deletedObjectContent) => {
+        if (deletedObjectContent.length) {
+          return deletedObjectContent.map((item) => item?.path);
+        }
+        return [];
+      })
+      .reduce((acc, subArray) => acc?.concat(subArray), []);
+
+    const allDeletedObjectsKeys = [
+      ...deletedObjectsContentFlattened,
+      ...deletedObjectsKeys,
+    ].map((item) => {
+      return {
+        Key: item,
+      };
+    });
+
+    let subFolders: string[] = [];
+    let nextObjects: string[] = [];
+
+    // deletedObjectsKeys.forEach((delObj) => {
+    //   if (delObj.endsWith('/')) {
+    //     // Find all items in the folder
+    //     const result = bucketObjects
+    //       .filter((item) => item.Key.startsWith(delObj))
+    //       .map((item) => item.Key);
+    //     if (result.length) {
+    //       subFolders = [...subFolders, ...result];
+    //     }
+    //   }
+    // });
+
+    // deletedObjectsKeys = subFolders.length ? subFolders : deletedObjectsKeys;
+
+    // if (deletedObjectsKeys.length >= 1000) {
+    //   nextObjects = deletedObjectsKeys.filter((delObj, index) => index >= 1000);
+    //   deletedObjects = deletedObjects.filter((delObj, index) => index < 1000);
+    // }
+
+    const command = new DeleteObjectsCommand({
+      Bucket: BUCKET,
+      Delete: {
+        Objects: allDeletedObjectsKeys,
+      },
+    });
+
+    const response = await client.send(command);
+
+    // if (nextObjects.length) {
+    //   deleteS3Objects(nextObjects);
+    //   return;
+    // }
     return Promise.resolve(response);
   } catch (err) {
     // Should notify UI about failure
