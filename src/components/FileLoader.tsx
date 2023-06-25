@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
-import { getObjects } from '../utils/aws-methods';
+import { getObjects, createS3Object } from '../utils/aws-methods';
 import { BrowserNodesInterface } from '../types/browser.types';
 
 import {
@@ -81,16 +81,16 @@ const FileLoader: React.FC = () => {
   ) => {
     event.preventDefault();
 
-    // Add empty body and Key: filename = "myfolder/" to create empty folder
-    const command = new PutObjectCommand({
-      Bucket: BUCKET,
-      Key: formValues.filename,
-      Body: formValues.filebody,
-    });
-
     try {
-      const response = await client.send(command);
-      handleObjectList();
+      const response = await createS3Object(
+        formValues.filename,
+        formValues.filebody
+      );
+
+      if (response?.$metadata.httpStatusCode === 200) {
+        console.log(response?.$metadata.httpStatusCode);
+        handleObjectList();
+      }
     } catch (err) {
       // Should notify UI about failure
       console.error(err);

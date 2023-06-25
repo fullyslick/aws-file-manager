@@ -128,3 +128,24 @@ export const getFolderTree = async () => {
 
   return Promise.resolve(folderTree);
 };
+
+export const createS3Object = async (
+  objectName: string,
+  objectContent?: string
+) => {
+  // Add empty body and Key: filename = "myfolder/" to create empty folder
+  const command = new PutObjectCommand({
+    Bucket: BUCKET,
+    Key: objectName,
+    Body: objectContent,
+  });
+
+  try {
+    const response = await client.send(command);
+
+    return Promise.resolve(response);
+  } catch (err) {
+    // Should notify UI about failure
+    console.error(err);
+  }
+};
