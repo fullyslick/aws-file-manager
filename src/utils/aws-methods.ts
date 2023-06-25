@@ -4,13 +4,10 @@ import {
   paginateListObjectsV2,
   PutObjectCommand,
   DeleteObjectsCommand,
+  DeleteObjectsCommandOutput,
 } from '@aws-sdk/client-s3';
 
-import {
-  BrowserNodeInterface,
-  BrowserNode,
-  BrowserNodesInterface,
-} from '../types/browser.types';
+import { BrowserNode } from '../types/browser.types';
 
 import { FolderTree, FolderNode } from '../types/folder-tree.types';
 
@@ -145,74 +142,80 @@ export const createS3Object = async (
     return Promise.resolve(response);
   } catch (err) {
     // Should notify UI about failure
-    console.error(err);
+    return Promise.reject(err);
   }
 };
 
-export const deleteS3Objects = async (deletedObjectsKeys: string[]) => {
-  try {
-    const deletedObjectsContent = await Promise.all(
-      deletedObjectsKeys.map((deletedObjectKey) =>
-        getS3Objects(deletedObjectKey, '')
-      )
-    );
+export const deleteS3Objects = async (selectedObjectsKeys: string[]) => {
+  let nextObjects: string[] = [];
+  let operationResponse: DeleteObjectsCommandOutput;
 
-    const deletedObjectsContentFlattened = deletedObjectsContent
-      .map((deletedObjectContent) => {
-        if (deletedObjectContent.length) {
-          return deletedObjectContent.map((item) => item?.path);
-        }
-        return [];
-      })
-      .reduce((acc, subArray) => acc?.concat(subArray), []);
+  const recursiveDelete = async (deletedObjectsKeys: string[]) => {
+    let allDeletedObjects = [];
 
-    const allDeletedObjectsKeys = [
-      ...deletedObjectsContentFlattened,
-      ...deletedObjectsKeys,
-    ].map((item) => {
-      return {
-        Key: item,
-      };
-    });
+    try {
+      if (nextObjects.length) {
+        allDeletedObjects = deletedObjectsKeys;
+      } else {
+        const deletedObjectsContent = await Promise.all(
+          deletedObjectsKeys.map((deletedObjectKey) =>
+            getS3Objects(deletedObjectKey, '')
+          )
+        );
 
-    let subFolders: string[] = [];
-    let nextObjects: string[] = [];
+        const deletedObjectsContentFlattened = deletedObjectsContent
+          .map((deletedObjectContent) => {
+            if (deletedObjectContent.length) {
+              return deletedObjectContent.map((item) => item?.path);
+            }
+            return [];
+          })
+          .reduce((acc, subArray) => acc?.concat(subArray), []);
 
-    // deletedObjectsKeys.forEach((delObj) => {
-    //   if (delObj.endsWith('/')) {
-    //     // Find all items in the folder
-    //     const result = bucketObjects
-    //       .filter((item) => item.Key.startsWith(delObj))
-    //       .map((item) => item.Key);
-    //     if (result.length) {
-    //       subFolders = [...subFolders, ...result];
-    //     }
-    //   }
-    // });
+        allDeletedObjects = [
+          ...deletedObjectsContentFlattened,
+          ...deletedObjectsKeys,
+        ];
+      }
 
-    // deletedObjectsKeys = subFolders.length ? subFolders : deletedObjectsKeys;
+      if (allDeletedObjects.length >= 1000) {
+        nextObjects = allDeletedObjects.filter(
+          (delObj, index) => index >= 1000
+        );
+        allDeletedObjects = allDeletedObjects.filter(
+          (delObj, index) => index < 1000
+        );
+      } else {
+        // reset nextObjects to set bottom of recursion
+        nextObjects = [];
+      }
 
-    // if (deletedObjectsKeys.length >= 1000) {
-    //   nextObjects = deletedObjectsKeys.filter((delObj, index) => index >= 1000);
-    //   deletedObjects = deletedObjects.filter((delObj, index) => index < 1000);
-    // }
+      const allDeletedObjectsKeys = allDeletedObjects.map((item) => {
+        return {
+          Key: item,
+        };
+      });
 
-    const command = new DeleteObjectsCommand({
-      Bucket: BUCKET,
-      Delete: {
-        Objects: allDeletedObjectsKeys,
-      },
-    });
+      const command = new DeleteObjectsCommand({
+        Bucket: BUCKET,
+        Delete: {
+          Objects: allDeletedObjectsKeys,
+        },
+      });
 
-    const response = await client.send(command);
+      const response = await client.send(command);
 
-    // if (nextObjects.length) {
-    //   deleteS3Objects(nextObjects);
-    //   return;
-    // }
-    return Promise.resolve(response);
-  } catch (err) {
-    // Should notify UI about failure
-    console.error(err);
-  }
+      if (nextObjects.length) {
+        await recursiveDelete(nextObjects);
+      } else {
+        operationResponse = response;
+      }
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
+
+  await recursiveDelete(selectedObjectsKeys);
+
+  return Promise.resolve(operationResponse!);
 };

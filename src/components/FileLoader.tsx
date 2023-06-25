@@ -97,7 +97,7 @@ const FileLoader: React.FC = () => {
       }
     } catch (err) {
       // Should notify UI about failure
-      console.error(err);
+      console.log(err);
     }
   };
   // EO: Creating an object with a given name
@@ -179,7 +179,7 @@ const FileLoader: React.FC = () => {
       }
     } catch (error) {
       // Inform UI
-      console.error(error);
+      console.log(error);
     }
   };
 
