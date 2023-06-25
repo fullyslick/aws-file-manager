@@ -101,6 +101,19 @@ const FileLoader: React.FC = () => {
   const [checkedObjects, setCheckedObjects] = useState<string[] | []>([]);
 
   // Deleting objects
+  const handleCheckboxCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checkedItemKey: string =
+      event.currentTarget.getAttribute('data-item-key')!;
+
+    if (event.currentTarget.checked) {
+      setCheckedObjects((prevState) => [...prevState, checkedItemKey]);
+    } else {
+      setCheckedObjects((prevState) =>
+        prevState.filter((item) => item !== checkedItemKey)
+      );
+    }
+  };
+
   const handleObjectDelete = async (deletedObjectsKeys: string[]) => {
     let subFolders: string[] = [];
     let nextObjects: string[] = [];
@@ -150,24 +163,13 @@ const FileLoader: React.FC = () => {
       console.error(err);
     }
   };
-  // EO: Deleting objects
-  const handleCheckboxCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const checkedItemKey: string =
-      event.currentTarget.getAttribute('data-item-key')!;
-
-    if (event.currentTarget.checked) {
-      setCheckedObjects((prevState) => [...prevState, checkedItemKey]);
-    } else {
-      setCheckedObjects((prevState) =>
-        prevState.filter((item) => item !== checkedItemKey)
-      );
-    }
-  };
 
   const handleDeleteSelected = () => {
     handleObjectDelete(checkedObjects);
     setCheckedObjects([]);
   };
+
+  // EO: Deleting objects
 
   return (
     <div>
@@ -178,13 +180,12 @@ const FileLoader: React.FC = () => {
           <button type='submit'>Upload File</button>
         </form>
       </div>
-      <p>
-        <button onClick={handleDeleteSelected}>Delete Selected</button>
-      </p>
       <div>
         <input type='text' ref={folderInputRef} />
         <button onClick={() => handleObjectList()}>List Objects</button>
-
+        <p>
+          <button onClick={handleDeleteSelected}>Delete Selected</button>
+        </p>
         {browserNodes.length !== 0 && (
           <div>
             <h2>S3 Objects</h2>
@@ -200,9 +201,6 @@ const FileLoader: React.FC = () => {
                 >
                   {browserNode.name}
                 </span>
-                <button onClick={() => handleObjectDelete([browserNode.path])}>
-                  Delete
-                </button>
               </li>
             ))}
           </div>
