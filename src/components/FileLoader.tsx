@@ -61,6 +61,7 @@ const FileLoader: React.FC = () => {
         setBrowserNodes(s3Objects);
       } else {
         setBrowserNodes([]);
+        throw new Error('There is no data found!');
       }
     } catch (error) {
       // Should notify UI

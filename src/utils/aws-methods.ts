@@ -43,7 +43,7 @@ const getS3Objects = async (prefix: string, delimiter: string = '/') => {
   }
 
   if (!fileObjects.length && !folderObjects.length) {
-    throw new Error('No data was found');
+    return [];
   }
 
   let folders: BrowserNode[] | [] = [];
