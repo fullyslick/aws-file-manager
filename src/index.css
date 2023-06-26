@@ -3,7 +3,7 @@
 }
 
 :root {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -17,11 +17,32 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  /* Colors */
+  --color-grey-light: #d9d9d9;
+  --color-grey-dark: #9d9c9e;
+  --color-lucid-blue: #f3f8ff;
+  --color-lucid-green: #b6c56f;
+  --color-lucid-green-dark: #6e7643;
+  --color-lucid-black: #272624;
+  --color-white: #ffffff;
+
+  /* Font-sizes */
+  --font-size-l: 24px;
+  --font-size-m: 16px;
+  --font-size-s: 14px;
+  --font-size-xs: 12px;
+
+  /* Line height */
+  --line-height-l: 1.5;
+  --line-height-m: 1.2;
+  --line-height-s: 1;
 }
 
 html,
 body,
-.root {
+.root,
+.app {
   margin: 0;
   height: 100%;
 }

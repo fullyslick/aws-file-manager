@@ -1,15 +1,16 @@
 import React from 'react';
 
+import ConfigBucket from './components/ConfigBucket/ConfigBucket';
 import FolderTreeList from './components/FolderTree/FolderTree';
-import './App.css';
 
 import FileLoader from './components/FileLoader';
 
 function App() {
   return (
-    <div className='App'>
-      <FileLoader />
-      <FolderTreeList />
+    <div className='app'>
+      <ConfigBucket />
+      {/* <FileLoader />
+      <FolderTreeList /> */}
     </div>
   );
 }

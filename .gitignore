@@ -28,3 +28,4 @@ yarn-error.log*
 
 # config
 .env
+.stylelintrc.json
