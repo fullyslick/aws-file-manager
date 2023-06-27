@@ -1,9 +1,13 @@
 import React from 'react';
 
-export type ButtonProps = {
+import Loader from '../Loader/Loader';
+
+import classes from './Button.module.css';
+
+type ButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode | string;
-  color?: 'light' | 'dark';
+  isLoading?: boolean;
   disabled?: boolean;
   type: 'submit' | 'button';
 };
@@ -11,13 +15,18 @@ export type ButtonProps = {
 const Button: React.FC<ButtonProps> = ({
   onClick,
   children,
-  color = 'light',
+  isLoading = false,
   disabled,
   type = 'button',
 }: ButtonProps) => {
   return (
-    <button type={type} onClick={onClick} color={color} disabled={disabled}>
-      {children}
+    <button
+      className={classes['button']}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {isLoading ? <Loader size='small' /> : children}
     </button>
   );
 };

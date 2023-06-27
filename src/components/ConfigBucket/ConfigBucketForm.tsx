@@ -1,12 +1,13 @@
 import React, { useRef, useContext, useState } from 'react';
 
 import { ConfigContext } from '../../contexts/ConfigContext';
-import Button from '../UI/Button';
+import Button from '../UI/Button/Button';
 import classes from './ConfigBucketForm.module.css';
 
 const ConfigBucketForm: React.FC = () => {
   const { setConfig } = useContext(ConfigContext);
   const [formSubmissionError, setFormSubmissionError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // TODO should rework with state/controlled
   const accessKeyRef = useRef<HTMLInputElement>(null);
@@ -30,6 +31,7 @@ const ConfigBucketForm: React.FC = () => {
       setFormSubmissionError('');
     }
 
+    setIsLoading(true);
     try {
       await setConfig({
         accessKeyId: accessKeyValue,
@@ -42,6 +44,8 @@ const ConfigBucketForm: React.FC = () => {
       setFormSubmissionError(
         'Unable to fetch data! Please check your credentials.'
       );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -57,13 +61,13 @@ const ConfigBucketForm: React.FC = () => {
       <p className='validation-error'></p>
       <label htmlFor='secret-access-key'>Secret Access Key</label>
       <input
-        className='invalid'
+        className=''
         type='text'
         placeholder='Secret Access Key'
         ref={secretKeyRef}
         id='secret-access-key'
       />
-      <p className='validation-error'>Required</p>
+      <p className='validation-error'></p>
       <label htmlFor='region'>Region</label>
       <input type='text' placeholder='Region' id='region' ref={regionRef} />
       <p className='validation-error'></p>
@@ -71,7 +75,9 @@ const ConfigBucketForm: React.FC = () => {
       <input type='text' placeholder='Bucket' id='bucket' ref={bucketRef} />
       <p className='validation-error'></p>
       <p className='validation-error'>{formSubmissionError}</p>
-      <Button type='submit'>Load Bucket</Button>
+      <Button type='submit' isLoading={isLoading} disabled={isLoading}>
+        Load Bucket
+      </Button>
     </form>
   );
 };
