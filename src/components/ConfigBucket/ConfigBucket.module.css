@@ -1,0 +1,69 @@
+.config-bucket {
+  margin: 40px 20px;
+  display: flex;
+  flex-flow: row wrap;
+  border: solid 2px var(--color-grey-light);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 601px) {
+  .config-bucket {
+    width: 580px;
+    position: absolute;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.config-bucket__branding {
+  width: 100%;
+  padding: 40px;
+  background-color: var(--color-lucid-black);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 601px) {
+  .config-bucket__branding {
+    width: 40%;
+  }
+}
+
+.config-bucket__branding-logo-image {
+  width: 40px;
+  margin: 0 auto;
+  display: block;
+}
+
+.config-bucket__branding-logo-title {
+  text-align: center;
+  color: var(--color-lucid-green);
+  margin: 10px auto;
+  font-size: var(--font-size-l);
+  line-height: var(--line-height-m);
+  font-weight: normal;
+}
+
+.config-bucket__branding-version {
+  text-align: center;
+  color: var(--color-white);
+  margin: 10px auto;
+  font-size: var(--font-size-s);
+  border-top: 1px solid var(--color-white);
+}
+
+.config-bucket__actions {
+  width: 100%;
+  background-color: var(--color-lucid-blue);
+}
+
+@media screen and (min-width: 601px) {
+  .config-bucket__actions {
+    width: 60%;
+  }
+}
