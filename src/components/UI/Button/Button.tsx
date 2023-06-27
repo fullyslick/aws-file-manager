@@ -10,6 +10,7 @@ type ButtonProps = {
   isLoading?: boolean;
   disabled?: boolean;
   type: 'submit' | 'button';
+  className?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,10 +19,11 @@ const Button: React.FC<ButtonProps> = ({
   isLoading = false,
   disabled,
   type = 'button',
+  className,
 }: ButtonProps) => {
   return (
     <button
-      className={classes['button']}
+      className={`${classes['button']} ${className}`}
       type={type}
       onClick={onClick}
       disabled={disabled}

@@ -1,3 +1,29 @@
 .config-bucket-form {
-  padding: 40px;
+  padding: 20px;
+}
+
+@media screen and (min-width: 601px) {
+  .config-bucket-form {
+    padding: 40px;
+  }
+}
+
+.config-bucket-form__submit-error {
+  display: flex;
+  margin: 0;
+  min-height: 48px;
+  color: var(--color-red);
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  text-align: center;
+}
+
+.config-bucket-form__submit-error span {
+  display: inline-block;
+  align-self: flex-end;
+}
+
+.config-bucket-form__submit-btn {
+  margin: 0 auto;
+  display: block;
 }

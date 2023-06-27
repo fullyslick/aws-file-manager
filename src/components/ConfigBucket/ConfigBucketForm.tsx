@@ -51,7 +51,7 @@ const ConfigBucketForm: React.FC = () => {
 
   return (
     <form className={classes['config-bucket-form']} onSubmit={handleSubmit}>
-      <label htmlFor='access-id'>Access Key Id</label>
+      <label htmlFor='access-id'>Access Key Id*</label>
       <input
         type='text'
         placeholder='Access ID'
@@ -59,7 +59,7 @@ const ConfigBucketForm: React.FC = () => {
         ref={accessKeyRef}
       />
       <p className='validation-error'></p>
-      <label htmlFor='secret-access-key'>Secret Access Key</label>
+      <label htmlFor='secret-access-key'>Secret Access Key*</label>
       <input
         className=''
         type='text'
@@ -68,14 +68,21 @@ const ConfigBucketForm: React.FC = () => {
         id='secret-access-key'
       />
       <p className='validation-error'></p>
-      <label htmlFor='region'>Region</label>
+      <label htmlFor='region'>Region*</label>
       <input type='text' placeholder='Region' id='region' ref={regionRef} />
       <p className='validation-error'></p>
-      <label htmlFor='bucket'>Bucket</label>
+      <label htmlFor='bucket'>Bucket*</label>
       <input type='text' placeholder='Bucket' id='bucket' ref={bucketRef} />
       <p className='validation-error'></p>
-      <p className='validation-error'>{formSubmissionError}</p>
-      <Button type='submit' isLoading={isLoading} disabled={isLoading}>
+      <p className={classes['config-bucket-form__submit-error']}>
+        {formSubmissionError}
+      </p>
+      <Button
+        type='submit'
+        isLoading={isLoading}
+        disabled={isLoading}
+        className={classes['config-bucket-form__submit-btn']}
+      >
         Load Bucket
       </Button>
     </form>
