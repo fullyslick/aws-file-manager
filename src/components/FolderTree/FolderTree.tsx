@@ -12,12 +12,12 @@ const FolderTreeList: React.FC = () => {
   const [folderTree, setFolderTree] = useState<FolderTree | []>([]);
 
   useEffect(() => {
-    getFolderTree()
-      .then((folderTree) => setFolderTree(folderTree))
-      .catch((err) => {
-        // Should notify UU
-        console.log(err);
-      });
+    // getFolderTree()
+    //   .then((folderTree) => setFolderTree(folderTree))
+    //   .catch((err) => {
+    //     // Should notify UU
+    //     console.log(err);
+    //   });
   }, []);
 
   return (
