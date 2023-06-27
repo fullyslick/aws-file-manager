@@ -54,19 +54,18 @@ const FileLoader: React.FC = () => {
   const folderInputRef = useRef<HTMLInputElement>(null);
 
   const handleObjectList = async () => {
-    try {
-      const s3Objects = await getObjects(folderInputRef.current?.value);
-
-      if (s3Objects.length) {
-        setBrowserNodes(s3Objects);
-      } else {
-        setBrowserNodes([]);
-        throw new Error('There is no data found!');
-      }
-    } catch (error) {
-      // Should notify UI
-      console.log(error);
-    }
+    // try {
+    //   const s3Objects = await getObjects(folderInputRef.current?.value);
+    //   if (s3Objects.length) {
+    //     setBrowserNodes(s3Objects);
+    //   } else {
+    //     setBrowserNodes([]);
+    //     throw new Error('There is no data found!');
+    //   }
+    // } catch (error) {
+    //   // Should notify UI
+    //   console.log(error);
+    // }
   };
   // EO: List all objects in a bucket
 
@@ -87,20 +86,20 @@ const FileLoader: React.FC = () => {
   ) => {
     event.preventDefault();
 
-    try {
-      const response = await createS3Object(
-        formValues.filename,
-        formValues.filebody
-      );
+    // try {
+    //   const response = await createS3Object(
+    //     formValues.filename,
+    //     formValues.filebody
+    //   );
 
-      if (response?.$metadata.httpStatusCode === 200) {
-        console.log(response?.$metadata.httpStatusCode);
-        handleObjectList();
-      }
-    } catch (err) {
-      // Should notify UI about failure
-      console.log(err);
-    }
+    //   if (response?.$metadata.httpStatusCode === 200) {
+    //     console.log(response?.$metadata.httpStatusCode);
+    //     handleObjectList();
+    //   }
+    // } catch (err) {
+    //   // Should notify UI about failure
+    //   console.log(err);
+    // }
   };
   // EO: Creating an object with a given name
 
@@ -121,18 +120,17 @@ const FileLoader: React.FC = () => {
   };
 
   const handleDeleteSelected = async () => {
-    try {
-      const response = await deleteS3Objects(checkedObjects);
-
-      if (response?.Deleted?.length) {
-        console.log(response?.Deleted?.length);
-        await handleObjectList();
-        setCheckedObjects([]);
-      }
-    } catch (error) {
-      // Inform UI
-      console.log(error);
-    }
+    // try {
+    //   const response = await deleteS3Objects(checkedObjects);
+    //   if (response?.Deleted?.length) {
+    //     console.log(response?.Deleted?.length);
+    //     await handleObjectList();
+    //     setCheckedObjects([]);
+    //   }
+    // } catch (error) {
+    //   // Inform UI
+    //   console.log(error);
+    // }
   };
   // EO: Deleting objects
 
@@ -143,13 +141,13 @@ const FileLoader: React.FC = () => {
   const handleReadFile = async () => {
     const fileInput = readFileInputRef.current!.value;
 
-    try {
-      const objectContent = await getObjectContent(fileInput);
-      setFileContent(objectContent);
-    } catch (error) {
-      // Inform UI
-      console.log(error);
-    }
+    // try {
+    //   const objectContent = await getObjectContent(fileInput);
+    //   setFileContent(objectContent);
+    // } catch (error) {
+    //   // Inform UI
+    //   console.log(error);
+    // }
   };
   // EO: Read file
 
