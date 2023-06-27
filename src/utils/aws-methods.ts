@@ -11,29 +11,39 @@ import {
 import { BrowserNode } from '../types/browser.types';
 
 import { FolderTree, FolderNode } from '../types/folder-tree.types';
+import { ConfigCredentialsInterface } from '../types/config-context.types';
 
-const ACCESS_KEY_ID: string = process.env.REACT_APP_ACCESS_KEY_ID || '';
-const SECRET_ACCESS_KEY: string = process.env.REACT_APP_SECRET_ACCESS_KEY || '';
-const ACCESS_REGION: string = process.env.REACT_APP_REGION || '';
+// TODO remove
 const BUCKET: string = process.env.REACT_APP_BUCKET || '';
 
-const config: S3ClientConfig = {
-  region: ACCESS_REGION,
-  credentials: {
-    accessKeyId: ACCESS_KEY_ID,
-    secretAccessKey: SECRET_ACCESS_KEY,
-  },
+const setS3Client = (credentials: ConfigCredentialsInterface) => {
+  const { region, accessKeyId, secretAccessKey } = credentials;
+
+  const config: S3ClientConfig = {
+    region: region,
+    credentials: {
+      accessKeyId: accessKeyId || '',
+      secretAccessKey: secretAccessKey || '',
+    },
+  };
+
+  return new S3Client(config);
 };
 
-const client = new S3Client(config);
-
-const getS3Objects = async (prefix: string, delimiter: string = '/') => {
+const getS3Objects = async (
+  credentials: ConfigCredentialsInterface,
+  prefix: string,
+  delimiter: string = '/'
+) => {
   const fileObjects = [];
   const folderObjects = [];
+
+  const client = setS3Client(credentials);
+
   for await (const data of paginateListObjectsV2(
     { client },
     {
-      Bucket: BUCKET,
+      Bucket: credentials.bucket,
       Delimiter: delimiter,
       Prefix: prefix !== '/' ? prefix : '',
     }
@@ -85,12 +95,27 @@ const getS3Objects = async (prefix: string, delimiter: string = '/') => {
   return [...folders, ...files];
 };
 
-export const getObjects = async (prefix: string = '') => {
-  return getS3Objects(prefix);
+export const getObjects = async (
+  credentials: ConfigCredentialsInterface,
+  prefix: string = ''
+) => {
+  return getS3Objects(credentials, prefix);
 };
 
-export const getFolderTree = async () => {
-  const s3Objects = await getS3Objects('/', '');
+export const getFolderTree = async (
+  credentials: ConfigCredentialsInterface
+) => {
+  const { region, accessKeyId, secretAccessKey } = credentials;
+
+  const client = new S3Client({
+    region: region,
+    credentials: {
+      accessKeyId: accessKeyId || '',
+      secretAccessKey: secretAccessKey || '',
+    },
+  });
+
+  const s3Objects = await getS3Objects(credentials, '/', '');
 
   // Extracts folders objects as array of strings: ['prefix/', 'prefix/subprefix', 'prefix/subprefix/subsubprefix']
   const foldersPaths = s3Objects
@@ -128,6 +153,7 @@ export const getFolderTree = async () => {
 };
 
 export const createS3Object = async (
+  credentials: ConfigCredentialsInterface,
   objectName: string,
   objectContent?: string
 ) => {
@@ -135,6 +161,16 @@ export const createS3Object = async (
     Bucket: BUCKET,
     Key: objectName,
     Body: objectContent,
+  });
+
+  const { region, accessKeyId, secretAccessKey } = credentials;
+
+  const client = new S3Client({
+    region: region,
+    credentials: {
+      accessKeyId: accessKeyId || '',
+      secretAccessKey: secretAccessKey || '',
+    },
   });
 
   try {
@@ -147,9 +183,22 @@ export const createS3Object = async (
   }
 };
 
-export const deleteS3Objects = async (selectedObjectsKeys: string[]) => {
+export const deleteS3Objects = async (
+  credentials: ConfigCredentialsInterface,
+  selectedObjectsKeys: string[]
+) => {
   let nextObjects: string[] = [];
   let operationResponse: DeleteObjectsCommandOutput;
+
+  const { region, accessKeyId, secretAccessKey } = credentials;
+
+  const client = new S3Client({
+    region: region,
+    credentials: {
+      accessKeyId: accessKeyId || '',
+      secretAccessKey: secretAccessKey || '',
+    },
+  });
 
   const recursiveDelete = async (deletedObjectsKeys: string[]) => {
     let allDeletedObjects = [];
@@ -160,7 +209,7 @@ export const deleteS3Objects = async (selectedObjectsKeys: string[]) => {
       } else {
         const deletedObjectsContent = await Promise.all(
           deletedObjectsKeys.map((deletedObjectKey) =>
-            getS3Objects(deletedObjectKey, '')
+            getS3Objects(credentials, deletedObjectKey, '')
           )
         );
 
@@ -221,10 +270,23 @@ export const deleteS3Objects = async (selectedObjectsKeys: string[]) => {
   return Promise.resolve(operationResponse!);
 };
 
-export const getObjectContent = async (objectKey: string) => {
+export const getObjectContent = async (
+  credentials: ConfigCredentialsInterface,
+  objectKey: string
+) => {
   const command = new GetObjectCommand({
     Bucket: BUCKET,
     Key: objectKey,
+  });
+
+  const { region, accessKeyId, secretAccessKey } = credentials;
+
+  const client = new S3Client({
+    region: region,
+    credentials: {
+      accessKeyId: accessKeyId || '',
+      secretAccessKey: secretAccessKey || '',
+    },
   });
 
   try {
