@@ -1,18 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import ConfigBucket from './components/ConfigBucket/ConfigBucket';
-import FolderTreeList from './components/FolderTree/FolderTree';
 
-import FileLoader from './components/FileLoader';
+import { ConfigContext } from './contexts/ConfigContext';
 
-function App() {
+const App: React.FC = () => {
+  const { hasConfig } = useContext(ConfigContext);
+
   return (
-    <div className='app'>
-      <ConfigBucket />
-      {/* <FileLoader />
-      <FolderTreeList /> */}
-    </div>
+    <div className='app'>{hasConfig ? <p>Logged in</p> : <ConfigBucket />}</div>
   );
-}
+};
 
 export default App;
