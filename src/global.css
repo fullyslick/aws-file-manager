@@ -54,7 +54,6 @@ body,
   display: flex;
   flex-flow: column;
   height: 100%;
-  overflow-y: scroll;
 }
 
 body {
@@ -69,5 +68,5 @@ ul {
 
 button,
 input {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
 }

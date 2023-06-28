@@ -1,6 +1,6 @@
 .input {
   border: solid 1px var(--color-grey-light);
-  padding: 4px 8px;
+  padding: 8px;
   font-size: var(--font-size-m);
   width: 100%;
   color: var(--color-grey-darkest);

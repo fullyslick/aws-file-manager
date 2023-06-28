@@ -5,6 +5,7 @@
   background-color: var(--color-lucid-green-dark);
   border: none;
   border-radius: 5px;
+  line-height: 20px;
   min-height: 34px;
   min-width: 130px;
   cursor: pointer;
