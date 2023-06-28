@@ -1,9 +1,10 @@
 import React from 'react';
 
 import Header from '../../components/UI/Header/Header';
+import FolderTree from '../../components/FolderTree/FolderTree';
+import WorkingDirectory from '../../components/WorkingDirectory/WorkingDirectory';
 
 import classes from './BucketViewer.module.css';
-import FolderTree from '../../components/FolderTree/FolderTree';
 
 const BucketViewer: React.FC = () => {
   return (
@@ -11,7 +12,9 @@ const BucketViewer: React.FC = () => {
       <Header />
       <main className={classes['bucket-viewer--main']}>
         <FolderTree className={classes['bucket-viewer--main-folder-tree']} />
-        <div className={classes['work-dir']}>work dir</div>
+        <WorkingDirectory
+          className={classes['bucket-viewer--main-working-directory']}
+        />
       </main>
     </div>
   );
