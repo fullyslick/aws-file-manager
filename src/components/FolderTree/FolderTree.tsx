@@ -9,7 +9,11 @@ import { getFolderTree } from '../../services/aws-methods';
 
 import { FolderTreeInterface } from '../../types/folder-tree.types';
 
-const FolderTree: React.FC = () => {
+type FolderTreeProps = {
+  className?: string;
+};
+
+const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
   const [folderTree, setFolderTree] = useState<FolderTreeInterface | []>([]);
 
   const { configData } = useContext(ConfigContext);
@@ -24,7 +28,7 @@ const FolderTree: React.FC = () => {
   }, []);
 
   return (
-    <>
+    <div className={`${classes['folder-tree']} ${className}`}>
       <h2>Folder Tree</h2>
       <ul className={classes['folder-tree-list']}>
         {folderTree.length > 0
@@ -37,7 +41,7 @@ const FolderTree: React.FC = () => {
             ))
           : null}
       </ul>
-    </>
+    </div>
   );
 };
 

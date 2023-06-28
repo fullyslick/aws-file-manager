@@ -9,8 +9,9 @@ const BucketViewer: React.FC = () => {
   return (
     <div className={classes['bucket-viewer']}>
       <Header />
-      <main>
-        <FolderTree />
+      <main className={classes['bucket-viewer--main']}>
+        <FolderTree className={classes['bucket-viewer--main-folder-tree']} />
+        <div className={classes['work-dir']}>work dir</div>
       </main>
     </div>
   );
