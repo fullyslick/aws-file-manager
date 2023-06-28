@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 
 import { ConfigContext } from '../../contexts/ConfigContext';
-import Button from '../UI/Button/Button';
-import Input from '../UI/Input/Input';
+import Button from '../../components/UI/Button/Button';
+import Input from '../../components/UI/Input/Input';
 
 import useInput from '../../hooks/useInput';
 import { requiredFiled } from '../../utils/validators';
