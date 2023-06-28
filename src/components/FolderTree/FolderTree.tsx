@@ -29,7 +29,7 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
 
   return (
     <div className={`${classes['folder-tree']} ${className ? className : ''}`}>
-      <h2>Folder Tree</h2>
+      <h2>{configData.bucket}</h2>
       <ul className={classes['folder-tree-list']}>
         {folderTree.length > 0
           ? folderTree.map((folderNode) => (
