@@ -1,7 +1,12 @@
-import React, { useRef, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { ConfigContext } from '../../contexts/ConfigContext';
 import Button from '../UI/Button/Button';
+import Input from '../UI/Input/Input';
+
+import useInput from '../../hooks/useInput';
+import { requiredFiled } from '../../utils/validators';
+
 import classes from './ConfigBucketForm.module.css';
 
 const ConfigBucketForm: React.FC = () => {
@@ -9,22 +14,50 @@ const ConfigBucketForm: React.FC = () => {
   const [formSubmissionError, setFormSubmissionError] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // TODO should rework with state/controlled
-  const accessKeyRef = useRef<HTMLInputElement>(null);
-  const secretKeyRef = useRef<HTMLInputElement>(null);
-  const regionRef = useRef<HTMLInputElement>(null);
-  const bucketRef = useRef<HTMLInputElement>(null);
+  const {
+    value: accessKeyValue,
+    error: accessKeyError,
+    handleValueChange: handleAccessKeyChange,
+    validateInput: validateAccessKey,
+  } = useInput(requiredFiled);
+
+  const {
+    value: secretKeyValue,
+    error: secretKeyError,
+    handleValueChange: handleSecretKeyChange,
+    validateInput: validateSecretKey,
+  } = useInput(requiredFiled);
+
+  const {
+    value: regionValue,
+    error: regionError,
+    handleValueChange: handleRegionChange,
+    validateInput: validateRegion,
+  } = useInput(requiredFiled);
+
+  const {
+    value: bucketValue,
+    error: bucketError,
+    handleValueChange: handleBucketChange,
+    validateInput: validateBucket,
+  } = useInput(requiredFiled);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // TODO should rework with state/controlled
-    const accessKeyValue = accessKeyRef.current?.value;
-    const secretKeyValue = secretKeyRef.current?.value;
-    const regionValue = regionRef.current?.value;
-    const bucketValue = bucketRef.current?.value;
+    const isValidAccessKey = validateAccessKey();
+    const isValidSecretKey = validateSecretKey();
+    const isValidRegion = validateRegion();
+    const isValidBucket = validateBucket();
 
-    // TODO should validate
+    if (
+      !isValidAccessKey ||
+      !isValidSecretKey ||
+      !isValidRegion ||
+      !isValidBucket
+    ) {
+      return;
+    }
 
     // Clear previous errors
     if (formSubmissionError.length) {
@@ -32,6 +65,7 @@ const ConfigBucketForm: React.FC = () => {
     }
 
     setIsLoading(true);
+
     try {
       await setConfig({
         accessKeyId: accessKeyValue,
@@ -40,7 +74,6 @@ const ConfigBucketForm: React.FC = () => {
         bucket: bucketValue,
       });
     } catch (error) {
-      console.log(error);
       setFormSubmissionError(
         'Unable to fetch data! Please check your credentials.'
       );
@@ -51,29 +84,38 @@ const ConfigBucketForm: React.FC = () => {
 
   return (
     <form className={classes['config-bucket-form']} onSubmit={handleSubmit}>
-      <label htmlFor='access-id'>Access Key Id*</label>
-      <input
+      <Input
+        label='Access Key Id*'
+        name='access-id'
         type='text'
-        placeholder='Access ID'
-        id='access-id'
-        ref={accessKeyRef}
+        value={accessKeyValue}
+        onChange={handleAccessKeyChange}
+        error={accessKeyError}
       />
-      <p className='validation-error'></p>
-      <label htmlFor='secret-access-key'>Secret Access Key*</label>
-      <input
-        className=''
+      <Input
+        label='Secret Access Key*'
+        name='secret-access-key'
         type='text'
-        placeholder='Secret Access Key'
-        ref={secretKeyRef}
-        id='secret-access-key'
+        value={secretKeyValue}
+        onChange={handleSecretKeyChange}
+        error={secretKeyError}
       />
-      <p className='validation-error'></p>
-      <label htmlFor='region'>Region*</label>
-      <input type='text' placeholder='Region' id='region' ref={regionRef} />
-      <p className='validation-error'></p>
-      <label htmlFor='bucket'>Bucket*</label>
-      <input type='text' placeholder='Bucket' id='bucket' ref={bucketRef} />
-      <p className='validation-error'></p>
+      <Input
+        label='Region*'
+        name='region'
+        type='text'
+        value={regionValue}
+        onChange={handleRegionChange}
+        error={regionError}
+      />
+      <Input
+        label='Bucket*'
+        name='bucket'
+        type='text'
+        value={bucketValue}
+        onChange={handleBucketChange}
+        error={bucketError}
+      />
       <p className={classes['config-bucket-form__submit-error']}>
         {formSubmissionError}
       </p>
