@@ -13,6 +13,11 @@
     rgba(45, 35, 66, 0.3) 0 7px 13px -3px;
   transition: all 0.3s;
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 5px;
+  vertical-align: middle;
 }
 
 .button:focus,

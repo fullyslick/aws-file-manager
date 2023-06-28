@@ -1,3 +1,32 @@
 .working-directory-actions {
-  background-color: palevioletred;
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--color-grey-lightest);
+  border-bottom: solid 1px var(--color-grey-dark);
+  padding: 16px;
+}
+
+@media screen and (min-width: 601px) {
+  .working-directory-actions {
+    justify-content: flex-start;
+  }
+}
+
+.working-directory-actions button {
+  font-size: var(--font-size-s);
+  min-width: 80px;
+  line-height: 20px;
+}
+
+@media screen and (min-width: 601px) {
+  .working-directory-actions button {
+    min-width: 100px;
+    margin-right: 24px;
+    font-size: var(--font-size-m);
+  }
+}
+
+.working-directory-actions--icon {
+  width: 16px;
+  height: 16px;
 }
