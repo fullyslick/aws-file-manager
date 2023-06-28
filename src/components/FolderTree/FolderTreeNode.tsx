@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+
+import { WorkingDirContext } from '../../contexts/WorkingDirContext';
 import { FolderNode } from '../../types/folder-tree.types';
+
 import classes from './FolderTreeNode.module.css';
 
 const FolderTreeNode: React.FC<{
@@ -11,13 +14,25 @@ const FolderTreeNode: React.FC<{
 }> = ({ isVisible = true, folderNode }) => {
   const { name, path, childFolders } = folderNode;
 
+  const { setWorkingDir } = useContext(WorkingDirContext);
+
+  const handleFolderNodeClick = (
+    event: React.MouseEvent<HTMLAnchorElement>
+  ) => {
+    event.preventDefault();
+
+    setWorkingDir(path);
+  };
+
   return (
     <li
       className={`${classes['folder-tree-node']} ${
         isVisible ? classes['folder-tree-node__active'] : ''
       }`}
     >
-      <a href={path}>{name}</a>
+      <a href={path} onClick={handleFolderNodeClick}>
+        {name}
+      </a>
       {childFolders.length > 0 && (
         <ul>
           {childFolders.map((childFolder) => (
@@ -29,4 +44,4 @@ const FolderTreeNode: React.FC<{
   );
 };
 
-export default FolderTreeNode;
+export default React.memo(FolderTreeNode);

@@ -25,7 +25,7 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
         // Should notify UU
         console.log(err);
       });
-  }, []);
+  }, []); // TODO should use lastModified from WorkingDir context to refresh tree
 
   return (
     <div className={`${classes['folder-tree']} ${className ? className : ''}`}>
