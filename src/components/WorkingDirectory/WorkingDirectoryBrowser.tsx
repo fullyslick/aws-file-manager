@@ -10,7 +10,11 @@ const WorkingDirectoryBrowser: React.FC<WorkingDirectoryBrowserProps> = ({
   className,
 }) => {
   return (
-    <div className={`${classes['working-directory-browser']} ${className}`}>
+    <div
+      className={`${classes['working-directory-browser']} ${
+        className ? className : ''
+      }`}
+    >
       <div>Content</div>
     </div>
   );

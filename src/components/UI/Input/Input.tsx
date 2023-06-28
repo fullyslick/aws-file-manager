@@ -26,7 +26,9 @@ const Input: FC<InputProps> = ({
   onChange,
 }) => {
   return (
-    <div className={`${classes['input-wrapper']} ${className}`}>
+    <div
+      className={`${classes['input-wrapper']} ${className ? className : ''}`}
+    >
       <label htmlFor={name} className={classes['input__label']}>
         {label}
       </label>

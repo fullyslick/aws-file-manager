@@ -10,7 +10,11 @@ type WorkingDirectoryProps = {
 
 const WorkingDirectory: React.FC<WorkingDirectoryProps> = ({ className }) => {
   return (
-    <div className={`${classes['working-directory']} ${className}`}>
+    <div
+      className={`${classes['working-directory']} ${
+        className ? className : ''
+      }`}
+    >
       <WorkingDirectoryActions />
       <WorkingDirectoryBrowser />
     </div>
