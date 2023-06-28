@@ -1,5 +1,7 @@
 import React, { FC } from 'react';
 
+import classes from './Input.module.css';
+
 interface InputProps {
   type: 'text' | 'textarea';
   label: string;
@@ -7,6 +9,7 @@ interface InputProps {
   name: string;
   placeholder?: string;
   error: string;
+  className?: string;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -19,12 +22,16 @@ const Input: FC<InputProps> = ({
   name,
   placeholder,
   error,
+  className,
   onChange,
 }) => {
   return (
-    <div className='input-wrapper'>
-      <label htmlFor={name}>{label}</label>
+    <div className={`${classes['input-wrapper']} ${className}`}>
+      <label htmlFor={name} className={classes['input__label']}>
+        {label}
+      </label>
       <input
+        className={classes['input']}
         type={type}
         id={name}
         value={value}
@@ -32,7 +39,7 @@ const Input: FC<InputProps> = ({
         placeholder={placeholder}
         onChange={onChange}
       />
-      <p className='validation-error'>{error}</p>
+      <p className={classes['input__error']}>{error}</p>
     </div>
   );
 };
