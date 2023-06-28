@@ -4,7 +4,7 @@ import FolderTreeNode from './FolderTreeNode';
 
 import classes from './FolderTree.module.css';
 
-import { getFolderTree } from '../../utils/aws-methods';
+import { getFolderTree } from '../../services/aws-methods';
 
 import { FolderTree } from '../../types/folder-tree.types';
 

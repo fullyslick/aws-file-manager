@@ -5,7 +5,7 @@ import {
   createS3Object,
   deleteS3Objects,
   getObjectContent,
-} from '../utils/aws-methods';
+} from '../services/aws-methods';
 import { BrowserNodesInterface } from '../types/browser.types';
 
 import {

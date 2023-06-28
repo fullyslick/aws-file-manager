@@ -1,7 +1,6 @@
 import React from 'react';
 
 import classes from './ConfigBucket.module.css';
-import logo from '../../assets/logo.svg';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 
 import ConfigBucketForm from './ConfigBucketForm';
