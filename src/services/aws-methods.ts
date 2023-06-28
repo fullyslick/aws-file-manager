@@ -10,7 +10,7 @@ import {
 
 import { BrowserNode } from '../types/browser.types';
 
-import { FolderTree, FolderNode } from '../types/folder-tree.types';
+import { FolderTreeInterface, FolderNode } from '../types/folder-tree.types';
 import { ConfigCredentialsInterface } from '../types/config-context.types';
 
 // TODO remove
@@ -105,16 +105,6 @@ export const getObjects = async (
 export const getFolderTree = async (
   credentials: ConfigCredentialsInterface
 ) => {
-  const { region, accessKeyId, secretAccessKey } = credentials;
-
-  const client = new S3Client({
-    region: region,
-    credentials: {
-      accessKeyId: accessKeyId || '',
-      secretAccessKey: secretAccessKey || '',
-    },
-  });
-
   const s3Objects = await getS3Objects(credentials, '/', '');
 
   // Extracts folders objects as array of strings: ['prefix/', 'prefix/subprefix', 'prefix/subprefix/subsubprefix']
@@ -123,8 +113,8 @@ export const getFolderTree = async (
     .map((s3Obj) => s3Obj.path);
 
   // Aggregates folder structure
-  let folderTree: FolderTree = [];
-  let level: any = { folderTree: folderTree };
+  let FolderTreeInterface: FolderTreeInterface = [];
+  let level: any = { FolderTreeInterface: FolderTreeInterface };
 
   // Iterate over each folderPath string
   foldersPaths.forEach((path) => {
@@ -132,14 +122,14 @@ export const getFolderTree = async (
     // For every segment create a folderNode
     path.split('/').reduce((accumulator, currentFolderSegment) => {
       if (!accumulator[currentFolderSegment]) {
-        accumulator[currentFolderSegment] = { folderTree: [] };
+        accumulator[currentFolderSegment] = { FolderTreeInterface: [] };
 
         if (currentFolderSegment) {
-          accumulator.folderTree.push(
+          accumulator.FolderTreeInterface.push(
             new FolderNode(
               currentFolderSegment,
               path,
-              accumulator[currentFolderSegment].folderTree
+              accumulator[currentFolderSegment].FolderTreeInterface
             )
           );
         }
@@ -149,7 +139,7 @@ export const getFolderTree = async (
     }, level);
   });
 
-  return Promise.resolve(folderTree);
+  return Promise.resolve(FolderTreeInterface);
 };
 
 export const createS3Object = async (

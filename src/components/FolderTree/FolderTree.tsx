@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 
 import FolderTreeNode from './FolderTreeNode';
+import { ConfigContext } from '../../contexts/ConfigContext';
 
 import classes from './FolderTree.module.css';
 
 import { getFolderTree } from '../../services/aws-methods';
 
-import { FolderTree } from '../../types/folder-tree.types';
+import { FolderTreeInterface } from '../../types/folder-tree.types';
 
-const FolderTreeList: React.FC = () => {
-  const [folderTree, setFolderTree] = useState<FolderTree | []>([]);
+const FolderTree: React.FC = () => {
+  const [folderTree, setFolderTree] = useState<FolderTreeInterface | []>([]);
+
+  const { configData } = useContext(ConfigContext);
 
   useEffect(() => {
-    // getFolderTree()
-    //   .then((folderTree) => setFolderTree(folderTree))
-    //   .catch((err) => {
-    //     // Should notify UU
-    //     console.log(err);
-    //   });
+    getFolderTree(configData)
+      .then((folderTree) => setFolderTree(folderTree))
+      .catch((err) => {
+        // Should notify UU
+        console.log(err);
+      });
   }, []);
 
   return (
@@ -38,4 +41,4 @@ const FolderTreeList: React.FC = () => {
   );
 };
 
-export default FolderTreeList;
+export default FolderTree;

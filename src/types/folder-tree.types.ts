@@ -12,4 +12,4 @@ export class FolderNode implements FolderNodeInterface {
   ) {}
 }
 
-export interface FolderTree extends Array<FolderNode> {}
+export interface FolderTreeInterface extends Array<FolderNode> {}
