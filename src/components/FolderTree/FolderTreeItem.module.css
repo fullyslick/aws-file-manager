@@ -6,3 +6,7 @@
 .folder-tree-item.folder-tree-item__active {
   display: block;
 }
+
+.folder-tree-item--link {
+  text-decoration: none;
+}
