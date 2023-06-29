@@ -29,7 +29,7 @@
 
 .breadcrumb-link:hover {
   background-color: var(--color-grey-light);
-  transition: all 0.3s;
+  transition: background-color 0.3s;
 }
 
 .breadcrumb-link:last-of-type {
