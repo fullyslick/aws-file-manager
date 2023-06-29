@@ -30,7 +30,7 @@ const setS3Client = (credentials: ConfigCredentialsInterface) => {
   return new S3Client(config);
 };
 
-const getS3Objects = async (
+export const getS3Objects = async (
   credentials: ConfigCredentialsInterface,
   prefix: string,
   delimiter: string = '/'
@@ -93,13 +93,6 @@ const getS3Objects = async (
   }
 
   return [...folders, ...files];
-};
-
-export const getObjects = async (
-  credentials: ConfigCredentialsInterface,
-  prefix: string = ''
-) => {
-  return getS3Objects(credentials, prefix);
 };
 
 export const getFolderTree = async (

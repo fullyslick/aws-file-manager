@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 
 import {
-  getObjects,
   createS3Object,
   deleteS3Objects,
   getObjectContent,

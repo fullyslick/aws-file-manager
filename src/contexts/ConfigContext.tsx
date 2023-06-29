@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 
 import { ConfigCredentialsInterface } from '../types/config-context.types';
 
-import { getObjects } from '../services/aws-methods';
+import { getS3Objects } from '../services/aws-methods';
 
 interface ConfigContextDataInterface {
   configData: ConfigCredentialsInterface;
@@ -36,7 +36,7 @@ const ConfigProvider: React.FC<ConfigProviderProps> = ({ children }) => {
 
   const setConfig = async (credentials: ConfigCredentialsInterface) => {
     try {
-      await getObjects(credentials);
+      await getS3Objects(credentials, '');
       setConfigData(credentials);
       setHasConfig(true);
     } catch (error) {
