@@ -34,14 +34,9 @@ const ConfigProvider: React.FC<ConfigProviderProps> = ({ children }) => {
   const [configData, setConfigData] =
     useState<ConfigCredentialsInterface>(configDataDefaults);
 
-  const setConfig = async (credentials: ConfigCredentialsInterface) => {
-    try {
-      await getS3Objects(credentials, '');
-      setConfigData(credentials);
-      setHasConfig(true);
-    } catch (error) {
-      return Promise.reject(error);
-    }
+  const setConfig = (credentials: ConfigCredentialsInterface) => {
+    setConfigData(credentials);
+    setHasConfig(true);
   };
 
   const clearConfig = () => {

@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 
 import { ConfigContext } from '../../contexts/ConfigContext';
+import { getS3Objects } from '../../services/aws-methods';
+
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 
@@ -49,30 +51,32 @@ const ConfigBucketForm: React.FC = () => {
     const isValidSecretKey = validateSecretKey();
     const isValidRegion = validateRegion();
     const isValidBucket = validateBucket();
+    const isFormValid =
+      isValidAccessKey && isValidSecretKey && isValidRegion && isValidBucket;
 
-    if (
-      !isValidAccessKey ||
-      !isValidSecretKey ||
-      !isValidRegion ||
-      !isValidBucket
-    ) {
+    if (!isFormValid) {
       return;
     }
 
-    // Clear previous errors
+    const credentials = {
+      accessKeyId: accessKeyValue,
+      secretAccessKey: secretKeyValue,
+      region: regionValue,
+      bucket: bucketValue,
+    };
+
+    // Clear previous submission errors
     if (formSubmissionError.length) {
       setFormSubmissionError('');
     }
 
+    // Display loader on button
     setIsLoading(true);
 
     try {
-      await setConfig({
-        accessKeyId: accessKeyValue,
-        secretAccessKey: secretKeyValue,
-        region: regionValue,
-        bucket: bucketValue,
-      });
+      // Throws error if credentials are incorrect
+      await getS3Objects(credentials, '');
+      setConfig(credentials);
     } catch (error) {
       setFormSubmissionError(
         'Unable to fetch data! Please check your credentials.'
