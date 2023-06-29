@@ -1,5 +1,7 @@
 import React from 'react';
 
+import FileBrowserItem from './FileBrowserItem';
+
 import { BrowserNodesInterface } from '../../types/browser.types';
 
 import classes from './FileBrowserList.module.css';
@@ -21,16 +23,7 @@ const BrowserList: React.FC<BrowserListProps> = ({
     >
       {browserNodes.length > 0
         ? browserNodes.map((browserNode) => (
-            <li key={browserNode.path}>
-              <input
-                type='checkbox'
-                onChange={() => {}}
-                data-item-key={browserNode.path}
-              />
-              <span style={{ color: browserNode.isFolder ? 'blue' : 'black' }}>
-                {browserNode.name}
-              </span>
-            </li>
+            <FileBrowserItem key={browserNode.path} browserNode={browserNode} />
           ))
         : null}
     </ul>
