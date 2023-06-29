@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 
-import FolderTreeNode from './FolderTreeNode';
+import FolderTreeList from './FolderTreeList';
+
 import { ConfigContext } from '../../contexts/ConfigContext';
 
 import classes from './FolderTree.module.css';
@@ -29,18 +30,14 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
 
   return (
     <div className={`${classes['folder-tree']} ${className ? className : ''}`}>
-      <h2>{configData.bucket}</h2>
-      <ul className={classes['folder-tree-list']}>
-        {folderTree.length > 0
-          ? folderTree.map((folderNode) => (
-              <FolderTreeNode
-                key={folderNode.path}
-                folderNode={folderNode}
-                isVisible={true}
-              />
-            ))
-          : null}
-      </ul>
+      <h2
+        onClick={() => {
+          console.log('Root bucket node click');
+        }}
+      >
+        {configData.bucket}
+      </h2>
+      <FolderTreeList folderTree={folderTree} />
     </div>
   );
 };

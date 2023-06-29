@@ -1,11 +1,12 @@
 import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 
+import FolderTreeList from './FolderTreeList';
 import { WorkingDirContext } from '../../contexts/WorkingDirContext';
 import { FolderNode } from '../../types/folder-tree.types';
 
-import classes from './FolderTreeNode.module.css';
+import classes from './FolderTreeItem.module.css';
 
-const FolderTreeNode: React.FC<{
+const FolderTreeItem: React.FC<{
   folderNode: FolderNode;
   isVisible?: boolean;
   // Should be isVisible = false by default;
@@ -26,22 +27,16 @@ const FolderTreeNode: React.FC<{
 
   return (
     <li
-      className={`${classes['folder-tree-node']} ${
-        isVisible ? classes['folder-tree-node__active'] : ''
+      className={`${classes['folder-tree-item']} ${
+        isVisible ? classes['folder-tree-item__active'] : ''
       }`}
     >
       <a href={path} onClick={handleFolderNodeClick}>
         {name}
       </a>
-      {childFolders.length > 0 && (
-        <ul>
-          {childFolders.map((childFolder) => (
-            <FolderTreeNode key={childFolder.path} folderNode={childFolder} />
-          ))}
-        </ul>
-      )}
+      {childFolders.length > 0 && <FolderTreeList folderTree={childFolders} />}
     </li>
   );
 };
 
-export default React.memo(FolderTreeNode);
+export default React.memo(FolderTreeItem);

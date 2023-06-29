@@ -1,0 +1,8 @@
+.folder-tree-item {
+  display: none;
+  margin: 8px 0;
+}
+
+.folder-tree-item.folder-tree-item__active {
+  display: block;
+}
