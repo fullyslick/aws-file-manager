@@ -1,5 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 
+import FileBrowserList from './FileBrowserList';
+
 import { WorkingDirContext } from '../../contexts/WorkingDirContext';
 import { ConfigContext } from '../../contexts/ConfigContext';
 import { getS3Objects } from '../../services/aws-methods';
@@ -38,20 +40,7 @@ const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
   return (
     <div className={`${classes['file-browser']} ${className ? className : ''}`}>
       {browserNodes.length !== 0 ? (
-        <div>
-          {browserNodes.map((browserNode) => (
-            <li key={browserNode.path}>
-              <input
-                type='checkbox'
-                onChange={() => {}}
-                data-item-key={browserNode.path}
-              />
-              <span style={{ color: browserNode.isFolder ? 'blue' : 'black' }}>
-                {browserNode.name}
-              </span>
-            </li>
-          ))}
-        </div>
+        <FileBrowserList browserNodes={browserNodes} />
       ) : (
         <p>Empty Folder</p>
       )}

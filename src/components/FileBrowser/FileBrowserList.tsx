@@ -1,20 +1,18 @@
 import React from 'react';
 
-import { FolderTreeInterface } from '../../types/folder-tree.types';
 import { BrowserNodesInterface } from '../../types/browser.types';
 
-import classes from './WorkingDirectoryBrowserList.module.css';
+import classes from './FileBrowserList.module.css';
 
-type WorkingDirectoryBrowserListProps = {
+type BrowserListProps = {
   className?: string;
   browserNodes: BrowserNodesInterface | [];
 };
 
-const WorkingDirectoryBrowserList: React.FC<
-  WorkingDirectoryBrowserListProps
-> = ({ className, browserNodes }) => {
-  console.log(browserNodes.length);
-
+const BrowserList: React.FC<BrowserListProps> = ({
+  className,
+  browserNodes,
+}) => {
   return (
     <ul
       className={`${classes['file-browser-list']} ${
@@ -39,4 +37,4 @@ const WorkingDirectoryBrowserList: React.FC<
   );
 };
 
-export default WorkingDirectoryBrowserList;
+export default BrowserList;
