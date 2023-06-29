@@ -9,7 +9,7 @@ type BreadcrumbsProps = {
   className?: string;
 };
 
-type Breadcrumbs = {
+type BreadcrumbsShape = {
   name: string;
   path: string;
 };
@@ -18,7 +18,7 @@ const delimiter = '?path=';
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
   const { workingDir, setWorkingDir } = useContext(WorkingDirContext);
-  const [breadcrumbs, setBreadcrumbs] = useState<Breadcrumbs[]>([]);
+  const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbsShape[]>([]);
 
   useEffect(() => {
     var path = workingDir.split('/');
