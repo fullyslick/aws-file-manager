@@ -1,3 +1,55 @@
 .file-browser-item {
-  outline: solid pink 2px;
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: var(--color-lucid-blue);
+}
+
+.file-browser-item:nth-child(2n) {
+  background-color: var(--color-white);
+}
+
+.file-browser-item:hover {
+  background-color: var(--color-grey-light);
+}
+
+.file-browser-item__checkbox {
+  height: 38px;
+  margin: 0 16px;
+}
+
+.file-browser-item--icon {
+  display: inline-block;
+}
+
+.file-browser-item__link {
+  flex-grow: 1;
+  padding: 8px 16px 8px 4px;
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-l);
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--color-lucid-black);
+}
+
+.file-browser-item__link span {
+  display: inline-block;
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 601px) {
+  .file-browser-item__link span {
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .file-browser-item__link span {
+    width: 800px;
+  }
 }
