@@ -42,7 +42,9 @@ const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
       {browserNodes.length !== 0 ? (
         <FileBrowserList browserNodes={browserNodes} />
       ) : (
-        <p>Empty Folder</p>
+        <p className={classes['file-browser__empty-msg']}>
+          This folder is empty.
+        </p>
       )}
     </div>
   );
