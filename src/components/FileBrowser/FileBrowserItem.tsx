@@ -18,7 +18,12 @@ const FileBrowserItem: React.FC<{
   ) => {
     event.preventDefault();
 
-    setWorkingDir(path);
+    if (isFolder) {
+      setWorkingDir(path);
+      return;
+    }
+
+    console.log('Open file ' + path);
   };
 
   const itemClassName = `${classes['file-browser-item']} ${
@@ -28,7 +33,12 @@ const FileBrowserItem: React.FC<{
   return (
     <li className={itemClassName}>
       <input type='checkbox' onChange={() => {}} data-item-key={path} />
-      <a href={path} style={{ color: isFolder ? 'blue' : 'black' }}>
+      <a
+        className={classes['file-browser-item__link']}
+        onClick={handleBrowserItemClick}
+        href={path}
+        style={{ color: isFolder ? 'blue' : 'black' }}
+      >
         {name}
       </a>
     </li>
