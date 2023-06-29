@@ -65,7 +65,7 @@ export const getS3Objects = async (
           // To extract folder name from Prefix, you need remove the current prefix/folder from the string
           // However on root level that is not required - !prefix = root
           !prefix
-            ? folderObj.Prefix!
+            ? folderObj.Prefix!.split('/')[0]
             : folderObj.Prefix!.split('/').slice(-2)[0],
           folderObj.Prefix!,
           true
