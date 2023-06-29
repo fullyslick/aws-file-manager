@@ -1,8 +1,9 @@
 import React from 'react';
 
+import FileBrowser from '../FileBrowser/FileBrowser';
+
 import classes from './WorkingDirectory.module.css';
 import WorkingDirectoryActions from './WorkingDirectoryActions';
-import WorkingDirectoryBrowser from './WorkingDirectoryBrowser';
 
 type WorkingDirectoryProps = {
   className?: string;
@@ -16,7 +17,7 @@ const WorkingDirectory: React.FC<WorkingDirectoryProps> = ({ className }) => {
       }`}
     >
       <WorkingDirectoryActions />
-      <WorkingDirectoryBrowser />
+      <FileBrowser />
     </div>
   );
 };

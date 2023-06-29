@@ -16,7 +16,11 @@ const WorkingDirectoryBrowserList: React.FC<
   console.log(browserNodes.length);
 
   return (
-    <ul>
+    <ul
+      className={`${classes['file-browser-list']} ${
+        className ? className : ''
+      }`}
+    >
       {browserNodes.length > 0
         ? browserNodes.map((browserNode) => (
             <li key={browserNode.path}>

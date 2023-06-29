@@ -5,15 +5,13 @@ import { ConfigContext } from '../../contexts/ConfigContext';
 import { getS3Objects } from '../../services/aws-methods';
 
 import { BrowserNode } from '../../types/browser.types';
-import classes from './WorkingDirectoryBrowser.module.css';
+import classes from './FileBrowser.module.css';
 
-type WorkingDirectoryBrowserProps = {
+type FileBrowserProps = {
   className?: string;
 };
 
-const WorkingDirectoryBrowser: React.FC<WorkingDirectoryBrowserProps> = ({
-  className,
-}) => {
+const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
   const { workingDir } = useContext(WorkingDirContext);
   const { configData } = useContext(ConfigContext);
   const [browserNodes, setBrowserNodes] = useState<BrowserNode[] | []>([]);
@@ -38,11 +36,7 @@ const WorkingDirectoryBrowser: React.FC<WorkingDirectoryBrowserProps> = ({
   }, [workingDir, configData]);
 
   return (
-    <div
-      className={`${classes['working-directory-browser']} ${
-        className ? className : ''
-      }`}
-    >
+    <div className={`${classes['file-browser']} ${className ? className : ''}`}>
       {browserNodes.length !== 0 ? (
         <div>
           {browserNodes.map((browserNode) => (
@@ -65,4 +59,4 @@ const WorkingDirectoryBrowser: React.FC<WorkingDirectoryBrowserProps> = ({
   );
 };
 
-export default WorkingDirectoryBrowser;
+export default FileBrowser;
