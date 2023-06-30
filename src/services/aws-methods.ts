@@ -141,7 +141,7 @@ export const createS3Object = async (
   objectContent?: string
 ) => {
   const command = new PutObjectCommand({
-    Bucket: BUCKET,
+    Bucket: credentials.bucket,
     Key: objectName,
     Body: objectContent,
   });
