@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import Modal from '../../UI/Modal/Modal';
 import Input from '../../UI/Input/Input';
@@ -25,7 +25,7 @@ const CreateFolderDialog: React.FC<CreateFolderDialogProps> = ({
   toggle,
 }: CreateFolderDialogProps) => {
   const { configData } = useContext(ConfigContext);
-  const { workingDir } = useContext(WorkingDirContext);
+  const { workingDir, setLastModified } = useContext(WorkingDirContext);
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -45,6 +45,7 @@ const CreateFolderDialog: React.FC<CreateFolderDialogProps> = ({
     try {
       await createS3Object(configData, workingDir + value + '/');
       // todo update last modified
+      setLastModified(new Date().toISOString());
       toggle();
     } catch (error) {
       console.error(error);

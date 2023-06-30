@@ -2,8 +2,6 @@ import React, { createContext, useState } from 'react';
 
 import { ConfigCredentialsInterface } from '../types/config-context.types';
 
-import { getS3Objects } from '../services/aws-methods';
-
 interface ConfigContextDataInterface {
   configData: ConfigCredentialsInterface;
   hasConfig: boolean;
