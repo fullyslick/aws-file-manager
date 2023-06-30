@@ -7,6 +7,8 @@ import { ConfigContext } from '../../../contexts/ConfigContext';
 
 import { getObjectContent } from '../../../services/aws-methods';
 
+import { ReactComponent as ErrorSVG } from '../../../assets/error.svg';
+
 import classes from './ReadFileDialog.module.css';
 
 type ReadFileDialogProps = {
@@ -49,13 +51,22 @@ const ReadFileDialog: React.FC<ReadFileDialogProps> = ({
 
   return (
     <Modal isShown={isShown} hide={toggle} headerText={filePath}>
-      <div className={classes['read-file-dialog']}>
+      <>
         {isLoading && <Loader color='black' />}
         {fileContent && (
           <p className={classes['read-file-dialog__content']}>{fileContent}</p>
         )}
-        {hasError && <p>Error !</p>}
-      </div>
+        {hasError && (
+          <div className={classes['read-file-dialog__error']}>
+            <ErrorSVG />
+            <p>
+              Something went wrong!
+              <br />
+              Please try again later.
+            </p>
+          </div>
+        )}
+      </>
     </Modal>
   );
 };
