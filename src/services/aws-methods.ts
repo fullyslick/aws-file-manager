@@ -161,7 +161,6 @@ export const createS3Object = async (
 
     return Promise.resolve(response);
   } catch (err) {
-    // Should notify UI about failure
     return Promise.reject(err);
   }
 };

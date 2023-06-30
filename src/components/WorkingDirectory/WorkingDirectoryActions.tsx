@@ -2,6 +2,7 @@ import React from 'react';
 
 import Button from '../UI/Button/Button';
 import CreateFolder from '../Actions/CreateFolder';
+import CreateFile from '../Actions/CreateFile';
 
 import { ReactComponent as TrashSVG } from '../../assets/trash.svg';
 import { ReactComponent as PlusSVG } from '../../assets/plus.svg';
@@ -19,10 +20,7 @@ const WorkingDirActions: React.FC<WorkingDirActionsProps> = ({ className }) => {
       }`}
     >
       <CreateFolder className={classes['working-directory-action']} />
-      <Button type='button'>
-        <PlusSVG className={classes['working-directory-actions--icon']} />
-        File
-      </Button>
+      <CreateFile className={classes['working-directory-action']} />
       <Button type='button'>
         <TrashSVG className={classes['working-directory-actions--icon']} />
         Delete
