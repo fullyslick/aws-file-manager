@@ -1,3 +1,5 @@
-.read-file-dialog {
-  outline: solid blue 1px;
+.read-file-dialog__content {
+  margin: 0;
+  font-size: var(--font-size-m);
+  max-height: 50vh;
 }
