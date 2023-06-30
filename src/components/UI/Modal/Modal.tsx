@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import FocusLock from 'react-focus-lock';
 
 import ReactDOM from 'react-dom';
@@ -18,18 +18,21 @@ const Modal: React.FC<ModalProps> = ({
   headerText,
   children,
 }) => {
-  const onKeyDown = (event: KeyboardEvent) => {
-    if (event.keyCode === 27 && isShown) {
-      hide();
-    }
-  };
+  const onKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.keyCode === 27 && isShown) {
+        hide();
+      }
+    },
+    [hide, isShown]
+  );
 
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown, false);
     return () => {
       document.removeEventListener('keydown', onKeyDown, false);
     };
-  }, [isShown]);
+  }, [isShown, onKeyDown]);
 
   const modal = (
     <React.Fragment>
