@@ -6,7 +6,7 @@ import classes from './Button.module.css';
 
 type ButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  children?: React.ReactNode | string;
+  children: React.ReactNode;
   isLoading?: boolean;
   disabled?: boolean;
   type: 'submit' | 'button';
