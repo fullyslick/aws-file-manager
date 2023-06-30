@@ -44,7 +44,6 @@ const CreateFolderDialog: React.FC<CreateFolderDialogProps> = ({
 
     try {
       await createS3Object(configData, workingDir + value + '/');
-      // todo update last modified
       setLastModified(new Date().toISOString());
       toggle();
     } catch (error) {
