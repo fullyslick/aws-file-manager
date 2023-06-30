@@ -258,19 +258,11 @@ export const getObjectContent = async (
   objectKey: string
 ) => {
   const command = new GetObjectCommand({
-    Bucket: BUCKET,
+    Bucket: credentials.bucket,
     Key: objectKey,
   });
 
-  const { region, accessKeyId, secretAccessKey } = credentials;
-
-  const client = new S3Client({
-    region: region,
-    credentials: {
-      accessKeyId: accessKeyId || '',
-      secretAccessKey: secretAccessKey || '',
-    },
-  });
+  const client = setS3Client(credentials);
 
   try {
     const response = await client.send(command);
