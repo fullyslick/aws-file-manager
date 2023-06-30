@@ -45,6 +45,10 @@
   min-height: 200px;
 }
 
+.modal.modal--blue {
+  background-color: var(--color-lucid-blue);
+}
+
 .modal__header {
   border-radius: 8px 8px 0 0;
   display: flex;

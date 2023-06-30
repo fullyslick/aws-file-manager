@@ -8,6 +8,7 @@ import { ReactComponent as CloseSVG } from '../../../assets/close.svg';
 import classes from './Modal.module.css';
 
 export interface ModalProps {
+  color?: 'white' | 'blue';
   isShown: boolean;
   hide: () => void;
   headerText: string;
@@ -15,6 +16,7 @@ export interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({
+  color = 'white',
   isShown,
   hide,
   headerText,
@@ -47,7 +49,7 @@ const Modal: React.FC<ModalProps> = ({
           tabIndex={-1}
           role='dialog'
         >
-          <div className={classes.modal}>
+          <div className={`${classes.modal} ${classes['modal--' + color]}`}>
             <div className={classes['modal__header']}>
               <span>{headerText}</span>
               <button
