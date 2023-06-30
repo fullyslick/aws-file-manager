@@ -1,5 +1,8 @@
 import React, { useContext } from 'react';
 
+import useModal from '../../hooks/useModal';
+import Modal from '../UI/Modal/Modal';
+
 import { WorkingDirContext } from '../../contexts/WorkingDirContext';
 import { BrowserNode } from '../../types/browser.types';
 
@@ -16,6 +19,8 @@ const FileBrowserItem: React.FC<{
 
   const { setWorkingDir } = useContext(WorkingDirContext);
 
+  const { isShown, toggle } = useModal();
+
   const handleBrowserItemClick = (
     event: React.MouseEvent<HTMLAnchorElement>
   ) => {
@@ -27,6 +32,7 @@ const FileBrowserItem: React.FC<{
     }
 
     console.log('Open file ' + path);
+    toggle();
   };
 
   const itemClassName = `${classes['file-browser-item']} ${
@@ -61,6 +67,11 @@ const FileBrowserItem: React.FC<{
         <FileIcon />
         <span>{name}</span>
       </a>
+      {!isFolder && (
+        <Modal isShown={isShown} hide={toggle} headerText='Confirmation'>
+          <p>Modal content</p>
+        </Modal>
+      )}
     </li>
   );
 };
