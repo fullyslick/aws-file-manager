@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { WorkingDirProvider } from '../../contexts/WorkingDirContext';
+import { SelectedFilesProvider } from '../../contexts/SelectedFilesContext';
 
 import Header from '../../components/UI/Header/Header';
 import FolderTree from '../../components/FolderTree/FolderTree';
@@ -15,9 +16,11 @@ const BucketViewer: React.FC = () => {
       <main className={classes['bucket-viewer--main']}>
         <WorkingDirProvider>
           <FolderTree className={classes['bucket-viewer--main-folder-tree']} />
-          <WorkingDirectory
-            className={classes['bucket-viewer--main-working-directory']}
-          />
+          <SelectedFilesProvider>
+            <WorkingDirectory
+              className={classes['bucket-viewer--main-working-directory']}
+            />
+          </SelectedFilesProvider>
         </WorkingDirProvider>
       </main>
     </div>
