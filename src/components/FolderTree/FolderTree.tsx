@@ -4,6 +4,7 @@ import FolderTreeList from './FolderTreeList';
 import FolderTreeItem from './FolderTreeItem';
 
 import { ConfigContext } from '../../contexts/ConfigContext';
+import { WorkingDirContext } from '../../contexts/WorkingDirContext';
 
 import classes from './FolderTree.module.css';
 
@@ -19,6 +20,7 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
   const [folderTree, setFolderTree] = useState<FolderTreeInterface | []>([]);
 
   const { configData } = useContext(ConfigContext);
+  const { lastModified } = useContext(WorkingDirContext);
 
   useEffect(() => {
     getFolderTree(configData)
@@ -27,7 +29,7 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
         // Should notify UU
         console.log(err);
       });
-  }, []); // TODO should use lastModified from WorkingDir context to refresh tree
+  }, [lastModified]);
 
   return (
     <div className={`${classes['folder-tree']} ${className ? className : ''}`}>

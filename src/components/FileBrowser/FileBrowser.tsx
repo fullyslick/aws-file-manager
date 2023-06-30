@@ -14,7 +14,7 @@ type FileBrowserProps = {
 };
 
 const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
-  const { workingDir } = useContext(WorkingDirContext);
+  const { workingDir, lastModified } = useContext(WorkingDirContext);
   const { configData } = useContext(ConfigContext);
   const [browserNodes, setBrowserNodes] = useState<BrowserNode[] | []>([]);
 
@@ -35,7 +35,7 @@ const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
     };
 
     getAwsData();
-  }, [workingDir, configData]);
+  }, [workingDir, configData, lastModified]);
 
   return (
     <div className={`${classes['file-browser']} ${className ? className : ''}`}>
