@@ -2,7 +2,10 @@ import React from 'react';
 
 import Button from '../UI/Button/Button';
 
-import classes from './CreateFolder.module.css';
+import useModal from '../../hooks/useModal';
+
+import CreateFolderDialog from '../Dialogs/CreateFolderDialog/CreateFolderDialog';
+
 import { ReactComponent as PlusSVG } from '../../assets/plus.svg';
 
 type CreateFolderProps = {
@@ -12,11 +15,16 @@ type CreateFolderProps = {
 const CreateFolder: React.FC<CreateFolderProps> = ({
   className,
 }: CreateFolderProps) => {
+  const { isShown, toggle } = useModal();
+
   return (
-    <Button type='button' className={className}>
-      <PlusSVG className={classes['actions--icon']} onClick={() => {}} />
-      Folder
-    </Button>
+    <>
+      <Button type='button' className={className} onClick={toggle}>
+        <PlusSVG />
+        Folder
+      </Button>
+      {isShown && <CreateFolderDialog isShown={isShown} toggle={toggle} />}
+    </>
   );
 };
 
