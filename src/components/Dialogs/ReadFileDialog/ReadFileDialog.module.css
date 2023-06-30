@@ -24,7 +24,3 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
-.read-file-dialog__error {
-  margin: 0;
-}
