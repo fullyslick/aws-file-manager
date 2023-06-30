@@ -43,6 +43,7 @@
   min-width: 320px;
   max-width: 80vw;
   min-height: 200px;
+  max-height: 80vh;
 }
 
 .modal.modal--blue {

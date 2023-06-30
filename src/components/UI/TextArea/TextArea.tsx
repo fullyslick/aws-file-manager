@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 
-import classes from './Input.module.css';
+import classes from './TextArea.module.css';
 
-interface InputProps {
-  type: 'text';
+interface TextAreProps {
   label: string;
   value: string;
   name: string;
@@ -15,8 +14,7 @@ interface InputProps {
   ) => void;
 }
 
-const Input: FC<InputProps> = ({
-  type,
+const TextArea: FC<TextAreProps> = ({
   label,
   value,
   name,
@@ -27,21 +25,20 @@ const Input: FC<InputProps> = ({
 }) => {
   return (
     <div className={`${className ? className : ''}`}>
-      <label htmlFor={name} className={classes['input__label']}>
+      <label htmlFor={name} className={classes['textarea__label']}>
         {label}
       </label>
-      <input
-        className={classes['input']}
-        type={type}
+      <textarea
+        className={classes['textarea']}
         id={name}
         value={value}
         name={name}
         placeholder={placeholder}
         onChange={onChange}
       />
-      <p className={classes['input__error']}>{error}</p>
+      <p className={classes['textarea__error']}>{error}</p>
     </div>
   );
 };
 
-export default React.memo(Input);
+export default React.memo(TextArea);
