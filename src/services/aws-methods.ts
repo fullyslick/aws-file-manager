@@ -13,9 +13,6 @@ import { BrowserNode } from '../types/browser.types';
 import { FolderTreeInterface, FolderNode } from '../types/folder-tree.types';
 import { ConfigCredentialsInterface } from '../types/config-context.types';
 
-// TODO remove
-const BUCKET: string = process.env.REACT_APP_BUCKET || '';
-
 const setS3Client = (credentials: ConfigCredentialsInterface) => {
   const { region, accessKeyId, secretAccessKey } = credentials;
 
@@ -146,15 +143,7 @@ export const createS3Object = async (
     Body: objectContent,
   });
 
-  const { region, accessKeyId, secretAccessKey } = credentials;
-
-  const client = new S3Client({
-    region: region,
-    credentials: {
-      accessKeyId: accessKeyId || '',
-      secretAccessKey: secretAccessKey || '',
-    },
-  });
+  const client = setS3Client(credentials);
 
   try {
     const response = await client.send(command);
@@ -172,15 +161,7 @@ export const deleteS3Objects = async (
   let nextObjects: string[] = [];
   let operationResponse: DeleteObjectsCommandOutput;
 
-  const { region, accessKeyId, secretAccessKey } = credentials;
-
-  const client = new S3Client({
-    region: region,
-    credentials: {
-      accessKeyId: accessKeyId || '',
-      secretAccessKey: secretAccessKey || '',
-    },
-  });
+  const client = setS3Client(credentials);
 
   const recursiveDelete = async (deletedObjectsKeys: string[]) => {
     let allDeletedObjects = [];
@@ -229,7 +210,7 @@ export const deleteS3Objects = async (
       });
 
       const command = new DeleteObjectsCommand({
-        Bucket: BUCKET,
+        Bucket: credentials.bucket,
         Delete: {
           Objects: allDeletedObjectsKeys,
         },
@@ -243,6 +224,7 @@ export const deleteS3Objects = async (
         operationResponse = response;
       }
     } catch (err) {
+      console.log(err);
       return Promise.reject(err);
     }
   };
