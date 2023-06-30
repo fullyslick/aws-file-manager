@@ -5,6 +5,7 @@ import useModal from '../../hooks/useModal';
 import ReadFileDialog from '../Dialogs/ReadFileDialog/ReadFileDialog';
 
 import { WorkingDirContext } from '../../contexts/WorkingDirContext';
+
 import { BrowserNode } from '../../types/browser.types';
 
 import { ReactComponent as FolderSVG } from '../../assets/folder.svg';
@@ -15,7 +16,8 @@ import classes from './FileBrowserItem.module.css';
 const FileBrowserItem: React.FC<{
   browserNode: BrowserNode;
   className?: string;
-}> = ({ browserNode, className }) => {
+  onCheckboxChange: (isChecked: boolean, selectedPath: string) => void;
+}> = ({ browserNode, className, onCheckboxChange }) => {
   const { name, path, isFolder } = browserNode;
 
   const { setWorkingDir } = useContext(WorkingDirContext);
@@ -40,6 +42,11 @@ const FileBrowserItem: React.FC<{
     isFolder ? classes['file-browser-item--folder'] : ''
   } ${className ? className : ''}`;
 
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const isChecked = event.target.checked;
+    onCheckboxChange(isChecked, path);
+  };
+
   const FileIcon: React.FC = () => {
     return (
       <>
@@ -57,7 +64,7 @@ const FileBrowserItem: React.FC<{
       <input
         className={classes['file-browser-item__checkbox']}
         type='checkbox'
-        onChange={() => {}}
+        onChange={handleCheckboxChange}
         data-item-key={path}
       />
       <a
