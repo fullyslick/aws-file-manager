@@ -68,7 +68,7 @@ const FileBrowserItem: React.FC<{
         <FileIcon />
         <span>{name}</span>
       </a>
-      {!isFolder && (
+      {!isFolder && isShown && (
         <ReadFileDialog isShown={isShown} toggle={toggle} filePath={path} />
       )}
     </li>
