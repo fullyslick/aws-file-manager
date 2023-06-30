@@ -47,7 +47,7 @@ const ReadFileDialog: React.FC<ReadFileDialogProps> = ({
     };
 
     readFileContent();
-  }, [isShown, filePath]);
+  }, [isShown, filePath, configData]);
 
   return (
     <Modal isShown={isShown} hide={toggle} headerText={filePath}>
