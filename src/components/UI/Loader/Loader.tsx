@@ -5,13 +5,21 @@ import { ReactComponent as LoaderSVG } from '../../../assets/loader-m.svg';
 
 type LoaderProps = {
   size?: 'small' | 'regular';
+  color?: 'white' | 'black';
 };
 
-const Loader: React.FC<LoaderProps> = ({ size = 'regular' }: LoaderProps) => {
+const Loader: React.FC<LoaderProps> = ({
+  size = 'regular',
+  color = 'white',
+}: LoaderProps) => {
   return (
     <>
       {size === 'regular' ? (
-        <LoaderSVG className={classes.loader} />
+        <LoaderSVG
+          className={`${classes.loader} ${
+            color === 'black' ? classes['loader--black'] : ''
+          }`}
+        />
       ) : (
         <LoaderSVGSmall className={classes.loader} />
       )}

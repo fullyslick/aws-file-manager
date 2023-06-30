@@ -5,3 +5,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.loader.loader--black {
+  filter: contrast(0) brightness(0.5);
+}
