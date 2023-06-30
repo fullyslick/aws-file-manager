@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 
 import useModal from '../../hooks/useModal';
-import Modal from '../UI/Modal/Modal';
+
+import ReadFileDialog from '../Dialogs/ReadFileDialog/ReadFileDialog';
 
 import { WorkingDirContext } from '../../contexts/WorkingDirContext';
 import { BrowserNode } from '../../types/browser.types';
@@ -31,7 +32,7 @@ const FileBrowserItem: React.FC<{
       return;
     }
 
-    console.log('Open file ' + path);
+    // Opens ReadFileDialog
     toggle();
   };
 
@@ -68,9 +69,7 @@ const FileBrowserItem: React.FC<{
         <span>{name}</span>
       </a>
       {!isFolder && (
-        <Modal isShown={isShown} hide={toggle} headerText='Confirmation'>
-          <p>Modal content</p>
-        </Modal>
+        <ReadFileDialog isShown={isShown} toggle={toggle} filePath={path} />
       )}
     </li>
   );
