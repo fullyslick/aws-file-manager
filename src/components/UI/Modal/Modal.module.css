@@ -6,6 +6,9 @@
   z-index: 700;
   width: inherit;
   outline: 0;
+  border: solid 2px var(--color-grey-light);
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .modal__backdrop {
@@ -20,33 +23,45 @@
 
 .modal {
   z-index: 100;
-  background: white;
+  background: var(--color-white);
+  display: flex;
+  flex-flow: column;
   position: relative;
   margin: auto;
   border-radius: 8px;
+  transition: all 0.3s;
+  min-width: 320px;
+  max-width: 80vw;
+  min-height: 200px;
 }
 
 .modal__header {
   border-radius: 8px 8px 0 0;
   display: flex;
   justify-content: space-between;
-  padding: 0.3rem;
+  align-items: flex-start;
+  padding: 8px;
+  background: var(--color-lucid-black);
+  color: var(--color-white);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-l);
 }
 
 .modal__header-close-button {
-  font-size: 0.8rem;
   border: none;
-  border-radius: 3px;
-  margin-left: 0.5rem;
+  margin-left: 16px;
   background: none;
-  :hover {
-    cursor: pointer;
-  }
+}
+
+.modal__header-close-button:hover {
+  cursor: pointer;
 }
 
 .modal__content {
-  padding: 10px;
-  max-height: 30rem;
+  padding: 16px;
   overflow-x: hidden;
   overflow-y: auto;
+  position: relative;
+  height: 100%;
+  flex-grow: 1;
 }

@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+
 import FocusLock from 'react-focus-lock';
 
-import ReactDOM from 'react-dom';
+import { ReactComponent as CloseSVG } from '../../../assets/close.svg';
 
 import classes from './Modal.module.css';
 
@@ -53,7 +55,7 @@ const Modal: React.FC<ModalProps> = ({
                 type='button'
                 onClick={hide}
               >
-                X
+                <CloseSVG />
               </button>
             </div>
             <div className={classes['modal__content']}>{children}</div>
