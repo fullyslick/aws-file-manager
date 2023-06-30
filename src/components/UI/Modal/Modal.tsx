@@ -47,6 +47,7 @@ const Modal: React.FC<ModalProps> = ({
         >
           <div className={classes.modal}>
             <div className={classes['modal__header']}>
+              <span>{headerText}</span>
               <button
                 className={classes['modal__header-close-button']}
                 type='button'
