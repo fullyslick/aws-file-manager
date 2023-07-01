@@ -34,8 +34,7 @@
 
 .breadcrumb-link:last-of-type {
   padding: 4px 16px;
-  background-color: var(--color-grey-darkest);
-  color: var(--color-white);
+  background-color: var(--color-grey-light);
 }
 .breadcrumb-link__icon {
   width: 10px;

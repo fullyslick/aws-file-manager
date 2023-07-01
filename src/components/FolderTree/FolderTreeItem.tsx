@@ -22,7 +22,7 @@ const FolderTreeItem: React.FC<{
 }> = ({ folderNode, isVisible = true, isRoot = false, className }) => {
   const { name, path, childFolders } = folderNode;
 
-  const { setWorkingDir } = useContext(WorkingDirContext);
+  const { setWorkingDir, workingDir } = useContext(WorkingDirContext);
 
   const handleFolderNodeClick = (
     event: React.MouseEvent<HTMLAnchorElement>
@@ -32,9 +32,12 @@ const FolderTreeItem: React.FC<{
     setWorkingDir(path);
   };
 
-  const itemClassName = `${classes['folder-tree-list__item']} ${
-    isVisible ? classes['folder-tree-list__item--active'] : ''
-  } ${className ? className : ''}`;
+  const itemClassName = `${classes['folder-tree-list__item']} 
+  ${isVisible ? classes['folder-tree-list__item--open'] : ''}
+  ${className ? className : ''}`;
+
+  const linkClassName = `${classes['folder-tree-list__item-link']} 
+  ${workingDir === path ? classes['folder-tree-list__item-link--active'] : ''}`;
 
   const Icon: React.FC = () => {
     return <>{isRoot ? <StorageSVG /> : <FolderSVG />}</>;
@@ -42,11 +45,7 @@ const FolderTreeItem: React.FC<{
 
   return (
     <li className={itemClassName}>
-      <a
-        href={path}
-        className={classes['folder-tree-list__item--link']}
-        onClick={handleFolderNodeClick}
-      >
+      <a href={path} className={linkClassName} onClick={handleFolderNodeClick}>
         <Icon />
         <span>{name}</span>
       </a>

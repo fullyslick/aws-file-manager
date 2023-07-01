@@ -2,7 +2,7 @@
   display: none;
 }
 
-.folder-tree-list__item.folder-tree-list__item--active {
+.folder-tree-list__item.folder-tree-list__item--open {
   display: block;
 }
 
@@ -10,7 +10,7 @@
   width: calc(100% - 24px);
 }
 
-.folder-tree-list__item--link {
+.folder-tree-list__item-link {
   padding: 4px 16px 4px 4px;
   text-decoration: none;
   color: var(--color-lucid-dark);
@@ -20,6 +20,10 @@
   gap: 8px;
 }
 
-.folder-tree-list__item--link:hover {
+.folder-tree-list__item-link:hover {
   background-color: var(--color-lucid-blue-darker);
+}
+
+.folder-tree-list__item-link.folder-tree-list__item-link--active {
+  background-color: var(--color-grey-light);
 }
