@@ -34,7 +34,7 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
         console.log(err);
         toggle();
       });
-  }, [lastModified]);
+  }, [lastModified, configData, toggle]);
 
   return (
     <div className={`${classes['folder-tree']} ${className ? className : ''}`}>
