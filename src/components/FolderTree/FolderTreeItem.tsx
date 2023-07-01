@@ -36,8 +36,14 @@ const FolderTreeItem: React.FC<{
   ${isVisible ? classes['folder-tree-list__item--open'] : ''}
   ${className ? className : ''}`;
 
-  const linkClassName = `${classes['folder-tree-list__item-link']} 
-  ${workingDir === path ? classes['folder-tree-list__item-link--active'] : ''}`;
+  const linkClassName = `${classes['folder-tree-list__item-link']}
+  ${workingDir === path ? classes['folder-tree-list__item-link--active'] : ''}
+  ${
+    childFolders.length > 0
+      ? classes['folder-tree-list__item-link--expandable']
+      : ''
+  }
+  `;
 
   const Icon: React.FC = () => {
     return <>{isRoot ? <StorageSVG /> : <FolderSVG />}</>;

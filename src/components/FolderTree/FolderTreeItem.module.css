@@ -27,3 +27,10 @@
 .folder-tree-list__item-link.folder-tree-list__item-link--active {
   background-color: var(--color-grey-light);
 }
+
+.folder-tree-list__item-link.folder-tree-list__item-link--expandable::before {
+  content: '▸';
+  font-size: var(--font-size-l);
+  margin-left: -20px;
+  margin-right: -8px;
+}
