@@ -24,11 +24,7 @@ const FileBrowserItem: React.FC<{
 
   const { isShown, toggle } = useModal();
 
-  const handleBrowserItemClick = (
-    event: React.MouseEvent<HTMLAnchorElement>
-  ) => {
-    event.preventDefault();
-
+  const handleBrowserItemClick = () => {
     if (isFolder) {
       setWorkingDir(path);
       return;
@@ -67,14 +63,13 @@ const FileBrowserItem: React.FC<{
         onChange={handleCheckboxChange}
         data-item-key={path}
       />
-      <a
+      <button
         className={classes['file-browser-item__link']}
         onClick={handleBrowserItemClick}
-        href={path}
       >
         <FileIcon />
         <span>{name}</span>
-      </a>
+      </button>
       {!isFolder && isShown && (
         <ReadFileDialog isShown={isShown} toggle={toggle} filePath={path} />
       )}

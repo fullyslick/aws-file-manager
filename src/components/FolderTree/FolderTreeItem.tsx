@@ -33,31 +33,30 @@ const FolderTreeItem: React.FC<{
     setWorkingDir(path);
   };
 
-  const folderLinkRef = useRef<HTMLAnchorElement | null>(null);
+  const folderBtnRef = useRef<HTMLButtonElement | null>(null);
 
   useDoubleClick({
-    ref: folderLinkRef,
+    ref: folderBtnRef,
     onSingleClick: expandFolder,
     onDoubleClick: displayContent,
-    isDefaultPrevented: true,
   });
 
   const itemClassName = `${classes['folder-tree-list__item']} 
   ${className ? className : ''}`;
 
-  const linkClassName = `${classes['folder-tree-list__item-link']}
+  const linkClassName = `${classes['folder-tree-list__item-btn']}
   ${
     workingDir === path ||
     (!isExpanded && workingDir.startsWith(path) && !isRoot)
-      ? classes['folder-tree-list__item-link--active']
+      ? classes['folder-tree-list__item-btn--active']
       : ''
   }
   ${
     childFolders.length > 0
-      ? classes['folder-tree-list__item-link--expandable']
+      ? classes['folder-tree-list__item-btn--expandable']
       : ''
   }
-  ${isExpanded ? classes['folder-tree-list__item-link--open'] : ''}
+  ${isExpanded ? classes['folder-tree-list__item-btn--open'] : ''}
   `;
 
   const Icon: React.FC = () => {
@@ -66,14 +65,10 @@ const FolderTreeItem: React.FC<{
 
   return (
     <li className={itemClassName}>
-      <a
-        href={`/?prefix=${path}`}
-        className={linkClassName}
-        ref={folderLinkRef}
-      >
+      <button className={linkClassName} ref={folderBtnRef}>
         <Icon />
         <span>{name}</span>
-      </a>
+      </button>
       {childFolders.length > 0 && isExpanded && (
         <FolderTreeList folderTree={childFolders} />
       )}

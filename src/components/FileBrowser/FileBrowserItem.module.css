@@ -32,6 +32,10 @@
   gap: 16px;
   text-decoration: none;
   color: var(--color-lucid-black);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
 }
 
 .file-browser-item__link span {

@@ -14,8 +14,6 @@ type BreadcrumbsShape = {
   path: string;
 };
 
-const delimiter = '?path=';
-
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
   const { workingDir, setWorkingDir } = useContext(WorkingDirContext);
   const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbsShape[]>([]);
@@ -23,11 +21,11 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
   useEffect(() => {
     var path = workingDir.split('/');
 
-    // Remove the last empty element from the path array and cur
+    // Remove the last empty element from the path array
     path.pop();
 
     // Generate breadcrumbs by accumulating the path
-    let breadcrumbsData = path
+    const breadcrumbsData = path
       .map((_, index) => {
         let accumulatedPath = path.slice(0, index + 1);
         return accumulatedPath.join('/') + '/';
@@ -47,28 +45,23 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
     setBreadcrumbs(breadcrumbsData);
   }, [workingDir]);
 
-  const handleBreadcrumbNav = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    const breadcrumbPath = (
-      event.currentTarget as HTMLAnchorElement
-    ).href.split(delimiter)[1];
-    setWorkingDir(breadcrumbPath);
+  const handleBreadcrumbNav = (path: string) => {
+    setWorkingDir(path);
   };
 
   return (
     <div className={`${classes['breadcrumbs']} ${className ? className : ''}`}>
       {breadcrumbs.length > 0 &&
         breadcrumbs.map((breadcrumb) => (
-          <a
+          <button
             key={breadcrumb.path}
-            href={`${delimiter}${breadcrumb.path}`}
-            className={classes['breadcrumb-link']}
+            className={classes['breadcrumb__item']}
             type='button'
-            onClick={handleBreadcrumbNav}
+            onClick={() => handleBreadcrumbNav(breadcrumb.path)}
           >
             {breadcrumb.name}
-            <RightArrowSVG className={classes['breadcrumb-link__icon']} />
-          </a>
+            <RightArrowSVG className={classes['breadcrumb__item-icon']} />
+          </button>
         ))}
     </div>
   );
