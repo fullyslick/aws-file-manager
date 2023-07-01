@@ -21,11 +21,7 @@ const FolderTreeList: React.FC<FolderTreeListProps> = ({
     >
       {folderTree.length > 0
         ? folderTree.map((folderNode) => (
-            <FolderTreeItem
-              key={folderNode.path}
-              folderNode={folderNode}
-              isVisible={true}
-            />
+            <FolderTreeItem key={folderNode.path} folderNode={folderNode} />
           ))
         : null}
     </ul>

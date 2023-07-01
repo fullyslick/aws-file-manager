@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 
 import FolderTreeList from './FolderTreeList';
 
 import { WorkingDirContext } from '../../contexts/WorkingDirContext';
+
+import useDoubleClick from '../../hooks/useDoubleClick';
 
 import { FolderNode } from '../../types/folder-tree.types';
 
@@ -13,27 +15,34 @@ import classes from './FolderTreeItem.module.css';
 
 const FolderTreeItem: React.FC<{
   folderNode: FolderNode;
-  isVisible?: boolean;
   isRoot?: boolean;
   className?: string;
-  // Should be isVisible = false by default;
-  // Context hold info about currently opened folderNode
-  // if currently opened folderNode startsWith this component "path", then this component should be visible
-}> = ({ folderNode, isVisible = true, isRoot = false, className }) => {
+}> = ({ folderNode, isRoot = false, className }) => {
   const { name, path, childFolders } = folderNode;
 
   const { setWorkingDir, workingDir } = useContext(WorkingDirContext);
 
-  const handleFolderNodeClick = (
-    event: React.MouseEvent<HTMLAnchorElement>
-  ) => {
-    event.preventDefault();
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
+  const expandFolder = () => {
+    setIsExpanded((prevState) => !prevState);
+  };
+
+  const displayContent = () => {
+    setIsExpanded(true);
     setWorkingDir(path);
   };
 
+  const folderLinkRef = useRef<HTMLAnchorElement | null>(null);
+
+  useDoubleClick({
+    ref: folderLinkRef,
+    onSingleClick: expandFolder,
+    onDoubleClick: displayContent,
+    isDefaultPrevented: true,
+  });
+
   const itemClassName = `${classes['folder-tree-list__item']} 
-  ${isVisible ? classes['folder-tree-list__item--open'] : ''}
   ${className ? className : ''}`;
 
   const linkClassName = `${classes['folder-tree-list__item-link']}
@@ -43,6 +52,7 @@ const FolderTreeItem: React.FC<{
       ? classes['folder-tree-list__item-link--expandable']
       : ''
   }
+  ${isExpanded ? classes['folder-tree-list__item-link--open'] : ''}
   `;
 
   const Icon: React.FC = () => {
@@ -51,11 +61,17 @@ const FolderTreeItem: React.FC<{
 
   return (
     <li className={itemClassName}>
-      <a href={path} className={linkClassName} onClick={handleFolderNodeClick}>
+      <a
+        href={`/?prefix=${path}`}
+        className={linkClassName}
+        ref={folderLinkRef}
+      >
         <Icon />
         <span>{name}</span>
       </a>
-      {childFolders.length > 0 && <FolderTreeList folderTree={childFolders} />}
+      {childFolders.length > 0 && isExpanded && (
+        <FolderTreeList folderTree={childFolders} />
+      )}
     </li>
   );
 };

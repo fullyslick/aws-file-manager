@@ -7,6 +7,7 @@ interface UseDoubleClickOptions {
   latency?: number;
   onSingleClick?: (event: MouseEvent) => void;
   onDoubleClick?: (event: MouseEvent) => void;
+  isDefaultPrevented?: boolean;
 }
 
 const useDoubleClick = ({
@@ -14,11 +15,16 @@ const useDoubleClick = ({
   latency = 300,
   onSingleClick = () => null,
   onDoubleClick = () => null,
+  isDefaultPrevented = false,
 }: UseDoubleClickOptions): void => {
   useEffect(() => {
     const clickRef = ref.current;
     let clickCount = 0;
     const handleClick = (e: MouseEvent) => {
+      if (isDefaultPrevented) {
+        e.preventDefault();
+      }
+
       clickCount += 1;
 
       setTimeout(() => {
@@ -36,7 +42,7 @@ const useDoubleClick = ({
     return () => {
       clickRef?.removeEventListener('click', handleClick);
     };
-  }, [ref, latency, onSingleClick, onDoubleClick]);
+  }, [ref, latency, onSingleClick, onDoubleClick, isDefaultPrevented]);
 };
 
 export default useDoubleClick;

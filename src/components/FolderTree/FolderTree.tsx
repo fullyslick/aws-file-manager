@@ -52,7 +52,6 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
               path: '',
               childFolders: [],
             }}
-            isVisible={true}
             isRoot={true}
             className={classes['folder-tree__root-item']}
           />

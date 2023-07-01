@@ -1,8 +1,4 @@
 .folder-tree-list__item {
-  display: none;
-}
-
-.folder-tree-list__item.folder-tree-list__item--open {
   display: block;
 }
 
@@ -30,6 +26,13 @@
 
 .folder-tree-list__item-link.folder-tree-list__item-link--expandable::before {
   content: '▸';
+  font-size: var(--font-size-l);
+  margin-left: -20px;
+  margin-right: -8px;
+}
+
+.folder-tree-list__item-link.folder-tree-list__item-link--expandable.folder-tree-list__item-link--open::before {
+  content: '▾';
   font-size: var(--font-size-l);
   margin-left: -20px;
   margin-right: -8px;
