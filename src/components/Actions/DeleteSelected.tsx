@@ -8,7 +8,7 @@ import useModal from '../../hooks/useModal';
 
 import { deleteS3Objects } from '../../services/aws-methods';
 
-import DeleteSelectedDialog from '../Dialogs/DeleteSelectedDialog/DeleteSelectedDialog';
+import ErrorDialog from '../Dialogs/ErrorDialog/ErrorDialog';
 import Button from '../UI/Button/Button';
 
 import { ReactComponent as TrashSVG } from '../../assets/trash.svg';
@@ -54,7 +54,13 @@ const DeleteSelected: React.FC<DeleteSelectedProps> = ({
         <TrashSVG />
         Delete
       </Button>
-      {isShown && <DeleteSelectedDialog isShown={isShown} toggle={toggle} />}
+      {isShown && (
+        <ErrorDialog
+          isShown={isShown}
+          toggle={toggle}
+          headerText='Unable to delete files'
+        />
+      )}
     </>
   );
 };
