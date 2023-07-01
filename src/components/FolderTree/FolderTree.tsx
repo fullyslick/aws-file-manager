@@ -37,7 +37,9 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
   }, [lastModified, configData, toggle]);
 
   return (
-    <div className={`${classes['folder-tree']} ${className ? className : ''}`}>
+    <aside
+      className={`${classes['folder-tree']} ${className ? className : ''}`}
+    >
       {hasError ? (
         <ErrorDialog
           isShown={hasError}
@@ -58,7 +60,7 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
           <FolderTreeList folderTree={folderTree} />
         </ul>
       )}
-    </div>
+    </aside>
   );
 };
 

@@ -50,7 +50,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
   };
 
   return (
-    <div className={`${classes['breadcrumbs']} ${className ? className : ''}`}>
+    <nav className={`${classes['breadcrumbs']} ${className ? className : ''}`}>
       {breadcrumbs.length > 0 &&
         breadcrumbs.map((breadcrumb) => (
           <button
@@ -63,7 +63,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
             <RightArrowSVG className={classes['breadcrumb__item-icon']} />
           </button>
         ))}
-    </div>
+    </nav>
   );
 };
 

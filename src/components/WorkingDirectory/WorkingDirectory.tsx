@@ -12,7 +12,7 @@ type WorkingDirectoryProps = {
 
 const WorkingDirectory: React.FC<WorkingDirectoryProps> = ({ className }) => {
   return (
-    <div
+    <section
       className={`${classes['working-directory']} ${
         className ? className : ''
       }`}
@@ -20,7 +20,7 @@ const WorkingDirectory: React.FC<WorkingDirectoryProps> = ({ className }) => {
       <WorkingDirectoryActions />
       <Breadcrumbs />
       <FileBrowser />
-    </div>
+    </section>
   );
 };
 
