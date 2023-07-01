@@ -45,7 +45,7 @@ const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
     };
 
     getAwsData();
-  }, [workingDir, configData, lastModified]);
+  }, [workingDir, configData, lastModified, hasError, toggle]);
 
   return (
     <div className={`${classes['file-browser']} ${className ? className : ''}`}>

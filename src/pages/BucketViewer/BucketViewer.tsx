@@ -7,9 +7,13 @@ import Header from '../../components/UI/Header/Header';
 import FolderTree from '../../components/FolderTree/FolderTree';
 import WorkingDirectory from '../../components/WorkingDirectory/WorkingDirectory';
 
+import useLeavePrompt from '../../hooks/useLeavePrompt';
+
 import classes from './BucketViewer.module.css';
 
 const BucketViewer: React.FC = () => {
+  useLeavePrompt();
+
   return (
     <div className={classes['bucket-viewer']}>
       <Header />
