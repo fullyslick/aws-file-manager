@@ -46,7 +46,12 @@ const FolderTreeItem: React.FC<{
   ${className ? className : ''}`;
 
   const linkClassName = `${classes['folder-tree-list__item-link']}
-  ${workingDir === path ? classes['folder-tree-list__item-link--active'] : ''}
+  ${
+    workingDir === path ||
+    (!isExpanded && workingDir.startsWith(path) && !isRoot)
+      ? classes['folder-tree-list__item-link--active']
+      : ''
+  }
   ${
     childFolders.length > 0
       ? classes['folder-tree-list__item-link--expandable']
