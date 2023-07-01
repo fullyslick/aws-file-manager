@@ -47,7 +47,11 @@ const CreateFileDialog: React.FC<CreateFileDialogProps> = ({
   const handleCreateFile = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!validateInput() || !validateTextArea()) {
+    const isValidInput = validateInput();
+    const isValidTextArea = validateTextArea();
+    const isFormValid = isValidInput && isValidTextArea;
+
+    if (!isFormValid) {
       return;
     }
     setIsLoading(true);
