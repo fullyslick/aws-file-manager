@@ -1,12 +1,25 @@
-.folder-tree-item {
+.folder-tree-list__item {
   display: none;
-  margin: 8px 0;
 }
 
-.folder-tree-item.folder-tree-item__active {
+.folder-tree-list__item.folder-tree-list__item--active {
   display: block;
 }
 
-.folder-tree-item--link {
+.folder-tree-list__item span {
+  width: calc(100% - 24px);
+}
+
+.folder-tree-list__item--link {
+  padding: 4px 16px 4px 4px;
   text-decoration: none;
+  color: var(--color-lucid-dark);
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.folder-tree-list__item--link:hover {
+  background-color: var(--color-lucid-blue-darker);
 }

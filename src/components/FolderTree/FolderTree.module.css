@@ -1,5 +1,7 @@
 .folder-tree {
   overflow: auto;
+  padding: 16px 0 0 16px;
+  background-color: var(--color-lucid-blue);
 }
 
 @media screen and (min-width: 601px) {
@@ -19,6 +21,12 @@
   }
 }
 
-.folder-tree--root-item {
-  font-size: var(--font-size-l);
+.folder-tree__root-item {
+  font-size: var(--font-size-m);
+  margin: 0 0 8px 0;
+  padding: 0;
+}
+
+.folder-tree__root-item span {
+  max-width: calc(100% - 40px);
 }

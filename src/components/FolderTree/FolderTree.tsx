@@ -6,11 +6,11 @@ import FolderTreeItem from './FolderTreeItem';
 import { ConfigContext } from '../../contexts/ConfigContext';
 import { WorkingDirContext } from '../../contexts/WorkingDirContext';
 
-import classes from './FolderTree.module.css';
-
 import { getFolderTree } from '../../services/aws-methods';
 
 import { FolderTreeInterface } from '../../types/folder-tree.types';
+
+import classes from './FolderTree.module.css';
 
 type FolderTreeProps = {
   className?: string;
@@ -33,16 +33,19 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
 
   return (
     <div className={`${classes['folder-tree']} ${className ? className : ''}`}>
-      <FolderTreeItem
-        folderNode={{
-          name: configData.bucket!,
-          path: '',
-          childFolders: [],
-        }}
-        isVisible={true}
-        className={classes['folder-tree--root-item']}
-      />
-      <FolderTreeList folderTree={folderTree} />
+      <ul>
+        <FolderTreeItem
+          folderNode={{
+            name: configData.bucket!,
+            path: '',
+            childFolders: [],
+          }}
+          isVisible={true}
+          isRoot={true}
+          className={classes['folder-tree__root-item']}
+        />
+        <FolderTreeList folderTree={folderTree} />
+      </ul>
     </div>
   );
 };
