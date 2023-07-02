@@ -15,14 +15,14 @@ const BucketViewer: React.FC = () => {
   useLeavePrompt();
 
   return (
-    <div className={classes['bucket-viewer']}>
+    <div className={classes['bucketViewer']}>
       <Header />
-      <main className={classes['bucket-viewer--main']}>
+      <main className={classes['bucketViewerMain']}>
         <WorkingDirProvider>
-          <FolderTree className={classes['bucket-viewer--main-folder-tree']} />
+          <FolderTree className={classes['bucketViewerFolderTree']} />
           <SelectedFilesProvider>
             <WorkingDirectory
-              className={classes['bucket-viewer--main-working-directory']}
+              className={classes['bucketViewerWorkingDirectory']}
             />
           </SelectedFilesProvider>
         </WorkingDirProvider>

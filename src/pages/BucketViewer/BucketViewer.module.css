@@ -1,10 +1,10 @@
-.bucket-viewer {
+.bucketViewer {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.bucket-viewer--main {
+.bucketViewerMain {
   overflow: hidden;
   flex-grow: 1;
   display: flex;
@@ -12,19 +12,19 @@
 }
 
 @media screen and (min-width: 601px) {
-  .bucket-viewer--main {
+  .bucketViewerMain {
     flex-wrap: nowrap;
   }
 }
 
-.bucket-viewer--main-folder-tree {
+.bucketViewerFolderTree {
   width: 100%;
   height: 30%;
   border-bottom: solid 1px var(--color-grey-dark);
 }
 
 @media screen and (min-width: 601px) {
-  .bucket-viewer--main-folder-tree {
+  .bucketViewerFolderTree {
     width: 30%;
     height: 100%;
     border-bottom: none;
@@ -32,13 +32,13 @@
   }
 }
 
-.bucket-viewer--main-working-directory {
+.bucketViewerWorkingDirectory {
   width: 100%;
   height: 70%;
 }
 
 @media screen and (min-width: 601px) {
-  .bucket-viewer--main-working-directory {
+  .bucketViewerWorkingDirectory {
     width: 70%;
     height: 100%;
   }
