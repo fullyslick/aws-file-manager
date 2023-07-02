@@ -22,14 +22,9 @@ const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
   const { configData } = useContext(ConfigContext);
   const [browserNodes, setBrowserNodes] = useState<BrowserNode[] | []>([]);
   const { isShown, toggle } = useModal();
-  const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
     const getAwsData = async () => {
-      if (hasError) {
-        setHasError(false);
-      }
-
       try {
         const s3Objects = await getS3Objects(configData, workingDir);
         if (s3Objects.length) {
@@ -39,13 +34,12 @@ const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
         }
       } catch (error) {
         console.error(error);
-        setHasError(true);
         toggle();
       }
     };
 
     getAwsData();
-  }, [workingDir, configData, lastModified, hasError, toggle]);
+  }, [workingDir, configData, lastModified, toggle]);
 
   return (
     <div className={`${styles['file-browser']} ${className ? className : ''}`}>
@@ -53,14 +47,10 @@ const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
         <FileBrowserList browserNodes={browserNodes} />
       ) : (
         <p className={styles['file-browser__empty-msg']}>
-          {hasError ? (
-            <span>Failed to fetch</span>
-          ) : (
-            <span>This folder is empty.</span>
-          )}
+          <span>This folder is empty.</span>
         </p>
       )}
-      {hasError && (
+      {isShown && (
         <ErrorDialog
           headerText='Unable to retrieve data!'
           isShown={isShown}
