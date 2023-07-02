@@ -86,7 +86,7 @@ const CreateFolderDialog: React.FC<CreateFolderDialogProps> = ({
             </p>
           </div>
         ) : (
-          <form onSubmit={handleCreateFolder}>
+          <form onSubmit={handleCreateFolder} id='createFolderForm'>
             <Input
               type='text'
               label='Folder name'

@@ -104,7 +104,7 @@ const CreateFileDialog: React.FC<CreateFileDialogProps> = ({
             </p>
           </div>
         ) : (
-          <form onSubmit={handleCreateFile}>
+          <form onSubmit={handleCreateFile} id='createFileForm'>
             <Input
               type='text'
               label='File name'

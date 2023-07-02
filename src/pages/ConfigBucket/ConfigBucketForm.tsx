@@ -88,7 +88,7 @@ const ConfigBucketForm: React.FC = () => {
   };
 
   return (
-    <form className={styles['form']} onSubmit={handleSubmit}>
+    <form className={styles['form']} onSubmit={handleSubmit} id='configForm'>
       <Input
         label='Access Key Id*'
         name='access-id'

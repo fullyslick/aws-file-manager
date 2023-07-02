@@ -60,6 +60,7 @@ const FileBrowserItem: React.FC<{
       <input
         className={classes['file-browser-item__checkbox']}
         type='checkbox'
+        name='browserItemCheckbox'
         onChange={handleCheckboxChange}
         data-item-key={path}
       />
