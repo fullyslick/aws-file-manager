@@ -41,22 +41,18 @@ const FolderTreeItem: React.FC<{
     onDoubleClick: displayContent,
   });
 
-  const itemClassName = `${styles['folder-tree-list__item']} 
+  const itemClassName = `${styles.folderTreeItem} 
   ${className ? className : ''}`;
 
-  const linkClassName = `${styles['folder-tree-list__item-btn']}
+  const linkClassName = `${styles.folderTreeItemBtn}
   ${
     workingDir === path ||
     (!isExpanded && workingDir.startsWith(path) && !isRoot)
-      ? styles['folder-tree-list__item-btn--active']
+      ? styles.folderTreeItemBtnActive
       : ''
   }
-  ${
-    childFolders.length > 0
-      ? styles['folder-tree-list__item-btn--expandable']
-      : ''
-  }
-  ${isExpanded ? styles['folder-tree-list__item-btn--open'] : ''}
+  ${childFolders.length > 0 ? styles.folderTreeItemBtnExpandable : ''}
+  ${isExpanded ? styles.folderTreeItemBtnOpen : ''}
   `;
 
   const Icon: React.FC = () => {

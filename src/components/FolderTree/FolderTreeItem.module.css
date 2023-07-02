@@ -1,12 +1,12 @@
-.folder-tree-list__item {
+.folderTreeItem {
   display: block;
 }
 
-.folder-tree-list__item span {
+.folderTreeItem span {
   width: calc(100% - 24px);
 }
 
-.folder-tree-list__item-btn {
+.folderTreeItemBtn {
   padding: 4px 16px 4px 4px;
   width: 100%;
   text-decoration: none;
@@ -22,22 +22,22 @@
   cursor: pointer;
 }
 
-.folder-tree-list__item-btn:hover {
+.folderTreeItemBtn:hover {
   background-color: var(--color-lucid-blue-darker);
 }
 
-.folder-tree-list__item-btn.folder-tree-list__item-btn--active {
+.folderTreeItemBtn.folderTreeItemBtnActive {
   background-color: var(--color-grey-light);
 }
 
-.folder-tree-list__item-btn.folder-tree-list__item-btn--expandable::before {
+.folderTreeItemBtn.folderTreeItemBtnExpandable::before {
   content: '▸';
   font-size: var(--font-size-l);
   margin-left: -20px;
   margin-right: -8px;
 }
 
-.folder-tree-list__item-btn.folder-tree-list__item-btn--expandable.folder-tree-list__item-btn--open::before {
+.folderTreeItemBtn.folderTreeItemBtnExpandable.folderTreeItemBtnOpen::before {
   content: '▾';
   font-size: var(--font-size-l);
   margin-left: -20px;
