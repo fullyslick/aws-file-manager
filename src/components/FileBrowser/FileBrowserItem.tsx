@@ -62,7 +62,6 @@ const FileBrowserItem: React.FC<{
         type='checkbox'
         name='browserItemCheckbox'
         onChange={handleCheckboxChange}
-        data-item-key={path}
       />
       <button
         className={classes['file-browser-item__link']}
