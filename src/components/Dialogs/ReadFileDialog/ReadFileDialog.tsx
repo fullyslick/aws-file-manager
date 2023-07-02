@@ -54,10 +54,10 @@ const ReadFileDialog: React.FC<ReadFileDialogProps> = ({
       <>
         {isLoading && <Loader color='black' />}
         {fileContent && (
-          <p className={styles['read-file-dialog__content']}>{fileContent}</p>
+          <p className={styles.readFileDialogContent}>{fileContent}</p>
         )}
         {hasError && (
-          <div className={styles['read-file-dialog__error']}>
+          <div className={styles.readFileDialogError}>
             <ErrorSVG />
             <p>
               Something went wrong!

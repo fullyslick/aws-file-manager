@@ -1,4 +1,4 @@
-.read-file-dialog__content {
+.readFileDialogContent {
   margin: 0;
   font-size: var(--font-size-m);
   max-height: 50vh;
@@ -14,7 +14,7 @@
   }
 }
 
-.read-file-dialog__error {
+.readFileDialogError {
   text-align: center;
   position: absolute;
   margin: 0;
