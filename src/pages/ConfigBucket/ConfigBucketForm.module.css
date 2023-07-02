@@ -1,14 +1,14 @@
-.ConfigBucketForm {
+.form {
   padding: 20px;
 }
 
 @media screen and (min-width: 601px) {
-  .ConfigBucketForm {
+  .form {
     padding: 40px;
   }
 }
 
-.ConfigBucketForm__submit-error {
+.form-submit-error {
   margin: 0;
   min-height: 48px;
   color: var(--color-red);
@@ -17,7 +17,7 @@
   text-align: center;
 }
 
-.ConfigBucketForm__submit-btn {
+.form-submit-btn {
   margin: 0 auto;
   display: block;
   min-height: 36px;

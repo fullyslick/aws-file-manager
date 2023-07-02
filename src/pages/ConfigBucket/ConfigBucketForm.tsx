@@ -9,7 +9,7 @@ import Input from '../../components/UI/Input/Input';
 import useInput from '../../hooks/useInput';
 import { requiredFiled } from '../../utils/validators';
 
-import classes from './ConfigBucketForm.module.css';
+import styles from './ConfigBucketForm.module.css';
 
 const ConfigBucketForm: React.FC = () => {
   const { setConfig } = useContext(ConfigContext);
@@ -88,7 +88,7 @@ const ConfigBucketForm: React.FC = () => {
   };
 
   return (
-    <form className={classes['ConfigBucketForm']} onSubmit={handleSubmit}>
+    <form className={styles['form']} onSubmit={handleSubmit}>
       <Input
         label='Access Key Id*'
         name='access-id'
@@ -121,14 +121,12 @@ const ConfigBucketForm: React.FC = () => {
         onChange={handleBucketChange}
         error={bucketError}
       />
-      <p className={classes['ConfigBucketForm__submit-error']}>
-        {formSubmissionError}
-      </p>
+      <p className={styles['form-submit-error']}>{formSubmissionError}</p>
       <Button
         type='submit'
         isLoading={isLoading}
         disabled={isLoading}
-        className={classes['ConfigBucketForm__submit-btn']}
+        className={styles['form-submit-btn']}
       >
         Load Bucket
       </Button>
