@@ -1,9 +1,9 @@
-.create-folder-dialog__submit {
+.createFolderDialogSubmit {
   margin: 16px auto;
   display: block;
 }
 
-.create-folder-dialog__error {
+.createFolderDialogError {
   text-align: center;
   position: absolute;
   margin: 0;

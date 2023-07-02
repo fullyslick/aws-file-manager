@@ -77,7 +77,7 @@ const CreateFolderDialog: React.FC<CreateFolderDialogProps> = ({
     >
       <>
         {hasError ? (
-          <div className={styles['create-folder-dialog__error']}>
+          <div className={styles.createFolderDialogError}>
             <ErrorSVG />
             <p>
               Something went wrong!
@@ -98,7 +98,7 @@ const CreateFolderDialog: React.FC<CreateFolderDialogProps> = ({
             <Button
               isLoading={isLoading}
               type='submit'
-              className={styles['create-folder-dialog__submit']}
+              className={styles.createFolderDialogSubmit}
             >
               Create Folder
             </Button>
