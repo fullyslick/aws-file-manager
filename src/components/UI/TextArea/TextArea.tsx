@@ -23,8 +23,10 @@ const TextArea: FC<TextAreProps> = ({
   className,
   onChange,
 }) => {
+  const textareaClassName = className || '';
+
   return (
-    <div className={`${className ? className : ''}`}>
+    <div {...(textareaClassName ? { className: textareaClassName } : {})}>
       <label htmlFor={name} className={classes['textarea__label']}>
         {label}
       </label>
