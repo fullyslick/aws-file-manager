@@ -7,22 +7,22 @@ import ConfigBucketForm from './ConfigBucketForm';
 
 const ConfigBucket: React.FC = () => {
   return (
-    <div className={classes['config-bucket']}>
-      <div className={classes['config-bucket__branding']}>
+    <main className={classes['ConfigBucket']}>
+      <div className={classes['ConfigBucket__branding']}>
         <div>
-          <LogoSVG className={classes['config-bucket__branding-logo-image']} />
-          <h1 className={classes['config-bucket__branding-logo-title']}>
+          <LogoSVG className={classes['ConfigBucket__branding-logo-image']} />
+          <h1 className={classes['ConfigBucket__branding-logo-title']}>
             S3 Bucket Viewer
           </h1>
         </div>
-        <p className={classes['config-bucket__branding-version']}>
+        <p className={classes['ConfigBucket__branding-version']}>
           Version 1.0.0
         </p>
       </div>
-      <div className={classes['config-bucket__actions']}>
+      <div className={classes['ConfigBucket__actions']}>
         <ConfigBucketForm />
       </div>
-    </div>
+    </main>
   );
 };
 

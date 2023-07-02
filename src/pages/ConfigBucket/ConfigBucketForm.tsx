@@ -76,6 +76,7 @@ const ConfigBucketForm: React.FC = () => {
     try {
       // Throws error if credentials are incorrect
       await getS3Objects(credentials, '');
+      // Store credentials
       setConfig(credentials);
     } catch (error) {
       setFormSubmissionError(
@@ -87,7 +88,7 @@ const ConfigBucketForm: React.FC = () => {
   };
 
   return (
-    <form className={classes['config-bucket-form']} onSubmit={handleSubmit}>
+    <form className={classes['ConfigBucketForm']} onSubmit={handleSubmit}>
       <Input
         label='Access Key Id*'
         name='access-id'
@@ -120,14 +121,14 @@ const ConfigBucketForm: React.FC = () => {
         onChange={handleBucketChange}
         error={bucketError}
       />
-      <p className={classes['config-bucket-form__submit-error']}>
+      <p className={classes['ConfigBucketForm__submit-error']}>
         {formSubmissionError}
       </p>
       <Button
         type='submit'
         isLoading={isLoading}
         disabled={isLoading}
-        className={classes['config-bucket-form__submit-btn']}
+        className={classes['ConfigBucketForm__submit-btn']}
       >
         Load Bucket
       </Button>

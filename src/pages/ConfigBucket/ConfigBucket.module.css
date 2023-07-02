@@ -1,4 +1,4 @@
-.config-bucket {
+.ConfigBucket {
   display: flex;
   flex-flow: row wrap;
   border: solid 2px var(--color-grey-light);
@@ -13,12 +13,12 @@
 }
 
 @media screen and (min-width: 601px) {
-  .config-bucket {
+  .ConfigBucket {
     max-width: 800px;
   }
 }
 
-.config-bucket__branding {
+.ConfigBucket__branding {
   width: 100%;
   padding: 16px 40px;
   background-color: var(--color-lucid-black);
@@ -29,19 +29,19 @@
 }
 
 @media screen and (min-width: 601px) {
-  .config-bucket__branding {
+  .ConfigBucket__branding {
     width: 40%;
     padding: 40px;
   }
 }
 
-.config-bucket__branding-logo-image {
+.ConfigBucket__branding-logo-image {
   width: 40px;
   margin: 0 auto;
   display: block;
 }
 
-.config-bucket__branding-logo-title {
+.ConfigBucket__branding-logo-title {
   text-align: center;
   color: var(--color-lucid-green);
   margin: 10px auto;
@@ -50,7 +50,7 @@
   font-weight: normal;
 }
 
-.config-bucket__branding-version {
+.ConfigBucket__branding-version {
   text-align: center;
   color: var(--color-white);
   margin: 8px auto;
@@ -58,13 +58,13 @@
   border-top: 1px solid var(--color-white);
 }
 
-.config-bucket__actions {
+.ConfigBucket__actions {
   width: 100%;
   background-color: var(--color-lucid-blue);
 }
 
 @media screen and (min-width: 601px) {
-  .config-bucket__actions {
+  .ConfigBucket__actions {
     width: 60%;
   }
 }
