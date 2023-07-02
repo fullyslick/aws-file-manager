@@ -1,10 +1,10 @@
-.working-directory-actions {
+.workingDirectoryActions {
   background-color: var(--color-grey-lightest);
   border-bottom: solid 1px var(--color-grey-dark);
   padding: 16px;
 }
 
-.working-directory-actions button {
+.workingDirectoryActions button {
   font-size: var(--font-size-s);
   min-width: 80px;
   line-height: 20px;
@@ -12,19 +12,19 @@
 }
 
 @media screen and (min-width: 601px) {
-  .working-directory-actions button {
+  .workingDirectoryActions button {
     min-width: 100px;
     margin-right: 24px;
     font-size: var(--font-size-m);
   }
 }
 
-.working-directory-actions--icon {
+.workingDirectoryActions--icon {
   width: 16px;
   height: 16px;
 }
 
-.working-directory-action svg {
+.workingDirectoryAction svg {
   width: 16px;
   height: 16px;
 }

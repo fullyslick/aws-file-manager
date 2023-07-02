@@ -4,7 +4,7 @@ import CreateFolder from '../Actions/CreateFolder';
 import CreateFile from '../Actions/CreateFile';
 import DeleteSelected from '../Actions/DeleteSelected';
 
-import classes from './WorkingDirectoryActions.module.css';
+import styles from './WorkingDirectoryActions.module.css';
 
 type WorkingDirActionsProps = {
   className?: string;
@@ -13,13 +13,13 @@ type WorkingDirActionsProps = {
 const WorkingDirActions: React.FC<WorkingDirActionsProps> = ({ className }) => {
   return (
     <div
-      className={`${classes['working-directory-actions']} ${
+      className={`${styles.workingDirectoryActions} ${
         className ? className : ''
       }`}
     >
-      <CreateFolder className={classes['working-directory-action']} />
-      <CreateFile className={classes['working-directory-action']} />
-      <DeleteSelected className={classes['working-directory-action']} />
+      <CreateFolder className={styles.workingDirectoryAction} />
+      <CreateFile className={styles.workingDirectoryAction} />
+      <DeleteSelected className={styles.workingDirectoryAction} />
     </div>
   );
 };
