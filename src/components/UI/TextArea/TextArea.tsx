@@ -31,7 +31,7 @@ const TextArea: FC<TextAreProps> = ({
         {label}
       </label>
       <textarea
-        className={styles.textarea}
+        className={`${styles.textarea} ${error ? styles.textareaInvalid : ''}`}
         id={name}
         value={value}
         name={name}

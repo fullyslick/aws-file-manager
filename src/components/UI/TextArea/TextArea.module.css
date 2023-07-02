@@ -12,7 +12,7 @@
   border: solid 1px var(--color-grey-dark);
 }
 
-.textarea.invalid {
+.textarea.textareaInvalid {
   border-color: var(--color-red);
 }
 
