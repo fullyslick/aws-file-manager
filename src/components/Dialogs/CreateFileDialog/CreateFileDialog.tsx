@@ -125,7 +125,7 @@ const CreateFileDialog: React.FC<CreateFileDialogProps> = ({
               type='submit'
               className={classes['create-file-dialog__submit']}
             >
-              Create Folder
+              Create File
             </Button>
           </form>
         )}
