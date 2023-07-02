@@ -2,7 +2,7 @@ import React from 'react';
 
 import FileBrowser from '../FileBrowser/FileBrowser';
 
-import classes from './WorkingDirectory.module.css';
+import styles from './WorkingDirectory.module.css';
 import WorkingDirectoryActions from './WorkingDirectoryActions';
 import Breadcrumbs from '../UI/Breadcrumbs/Breadcrumbs';
 
@@ -13,7 +13,7 @@ type WorkingDirectoryProps = {
 const WorkingDirectory: React.FC<WorkingDirectoryProps> = ({ className }) => {
   return (
     <section
-      className={`${classes.workingDirectory} ${className ? className : ''}`}
+      className={`${styles.workingDirectory} ${className ? className : ''}`}
     >
       <WorkingDirectoryActions />
       <Breadcrumbs />
