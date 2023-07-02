@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import useModal from '../../hooks/useModal';
 
 import ReadFileDialog from '../Dialogs/ReadFileDialog/ReadFileDialog';
-
-import { WorkingDirContext } from '../../contexts/WorkingDirContext';
 
 import { BrowserNode } from '../../types/browser.types';
 
@@ -17,16 +15,15 @@ const FileBrowserItem: React.FC<{
   browserNode: BrowserNode;
   className?: string;
   onCheckboxChange: (isChecked: boolean, selectedPath: string) => void;
-}> = ({ browserNode, className, onCheckboxChange }) => {
+  onClick: (path: string) => void;
+}> = ({ browserNode, className, onCheckboxChange, onClick }) => {
   const { name, path, isFolder } = browserNode;
-
-  const { setWorkingDir } = useContext(WorkingDirContext);
 
   const { isShown, toggle } = useModal();
 
   const handleBrowserItemClick = () => {
     if (isFolder) {
-      setWorkingDir(path);
+      onClick(path);
       return;
     }
 

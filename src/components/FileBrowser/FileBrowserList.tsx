@@ -17,7 +17,7 @@ const BrowserList: React.FC<BrowserListProps> = ({
   browserNodes,
 }) => {
   const { setSelectedFiles } = useContext(SelectedFilesContext);
-  const { workingDir } = useContext(WorkingDirContext);
+  const { workingDir, setWorkingDir } = useContext(WorkingDirContext);
 
   // When folder is clicked reset selected files
   useEffect(() => {
@@ -40,6 +40,13 @@ const BrowserList: React.FC<BrowserListProps> = ({
     [setSelectedFiles]
   );
 
+  const handleFileItemClick = useCallback(
+    (path: string) => {
+      setWorkingDir(path);
+    },
+    [setWorkingDir]
+  );
+
   const fileBrowserListClassName = className || '';
 
   return (
@@ -52,6 +59,7 @@ const BrowserList: React.FC<BrowserListProps> = ({
         ? browserNodes.map((browserNode) => (
             <FileBrowserItem
               key={browserNode.path}
+              onClick={handleFileItemClick}
               onCheckboxChange={handleCheckBoxChange}
               browserNode={browserNode}
             />
