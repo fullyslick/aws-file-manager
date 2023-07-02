@@ -16,9 +16,7 @@ const FolderTreeList: React.FC<FolderTreeListProps> = ({
   folderTree,
 }) => {
   return (
-    <ul
-      className={`${styles['folder-tree-list']} ${className ? className : ''}`}
-    >
+    <ul className={`${styles.folderTreeList} ${className ? className : ''}`}>
       {folderTree.length > 0
         ? folderTree.map((folderNode) => (
             <FolderTreeItem key={folderNode.path} folderNode={folderNode} />
