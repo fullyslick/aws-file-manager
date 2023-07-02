@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import classes from './TextArea.module.css';
+import styles from './TextArea.module.css';
 
 interface TextAreProps {
   label: string;
@@ -27,18 +27,18 @@ const TextArea: FC<TextAreProps> = ({
 
   return (
     <div {...(textareaClassName ? { className: textareaClassName } : {})}>
-      <label htmlFor={name} className={classes['textarea__label']}>
+      <label htmlFor={name} className={styles.textareaLabel}>
         {label}
       </label>
       <textarea
-        className={classes['textarea']}
+        className={styles.textarea}
         id={name}
         value={value}
         name={name}
         placeholder={placeholder}
         onChange={onChange}
       />
-      <p className={classes['textarea__error']}>{error}</p>
+      <p className={styles.textareaError}>{error}</p>
     </div>
   );
 };

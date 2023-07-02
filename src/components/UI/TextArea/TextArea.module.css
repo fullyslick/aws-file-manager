@@ -16,14 +16,14 @@
   border-color: var(--color-red);
 }
 
-.textarea__label {
+.textareaLabel {
   color: var(--color-grey-darkest);
   font-size: var(--font-size-s);
   margin: 0;
   display: block;
 }
 
-.textarea__error {
+.textareaError {
   margin: 0;
   font-size: var(--font-size-xs);
   min-height: 24px;

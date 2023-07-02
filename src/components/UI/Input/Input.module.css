@@ -11,10 +11,6 @@
   border: solid 1px var(--color-grey-dark);
 }
 
-.input.invalid {
-  border-color: var(--color-red);
-}
-
 .input__label {
   color: var(--color-grey-darkest);
   font-size: var(--font-size-s);
