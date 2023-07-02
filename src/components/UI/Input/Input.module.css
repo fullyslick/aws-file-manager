@@ -11,7 +11,7 @@
   border: solid 1px var(--color-grey-dark);
 }
 
-.input.invalid {
+.input.inputInvalid {
   border-color: var(--color-red);
 }
 

@@ -33,7 +33,7 @@ const Input: FC<InputProps> = ({
         {label}
       </label>
       <input
-        className={styles.input}
+        className={`${styles.input} ${error ? styles.inputInvalid : ''}`}
         type={type}
         id={name}
         value={value}
