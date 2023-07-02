@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import classes from './Input.module.css';
+import styles from './Input.module.css';
 
 interface InputProps {
   type: 'text';
@@ -29,11 +29,11 @@ const Input: FC<InputProps> = ({
 
   return (
     <div {...(inputClassName ? { className: inputClassName } : {})}>
-      <label htmlFor={name} className={classes['input__label']}>
+      <label htmlFor={name} className={styles.inputLabel}>
         {label}
       </label>
       <input
-        className={classes['input']}
+        className={styles.input}
         type={type}
         id={name}
         value={value}
@@ -41,7 +41,7 @@ const Input: FC<InputProps> = ({
         placeholder={placeholder}
         onChange={onChange}
       />
-      <p className={classes['input__error']}>{error}</p>
+      <p className={styles.inputError}>{error}</p>
     </div>
   );
 };

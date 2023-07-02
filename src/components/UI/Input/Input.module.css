@@ -11,14 +11,18 @@
   border: solid 1px var(--color-grey-dark);
 }
 
-.input__label {
+.input.invalid {
+  border-color: var(--color-red);
+}
+
+.inputLabel {
   color: var(--color-grey-darkest);
   font-size: var(--font-size-s);
   margin: 0;
   display: inline-block;
 }
 
-.input__error {
+.inputError {
   margin: 0;
   font-size: var(--font-size-xs);
   min-height: 24px;
