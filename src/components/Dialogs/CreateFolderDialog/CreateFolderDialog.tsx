@@ -13,7 +13,7 @@ import { requiredFiled } from '../../../utils/validators';
 
 import { ReactComponent as ErrorSVG } from '../../../assets/error.svg';
 
-import classes from './CreateFolderDialog.module.css';
+import styles from './CreateFolderDialog.module.css';
 
 type CreateFolderDialogProps = {
   isShown: boolean;
@@ -77,7 +77,7 @@ const CreateFolderDialog: React.FC<CreateFolderDialogProps> = ({
     >
       <>
         {hasError ? (
-          <div className={classes['create-folder-dialog__error']}>
+          <div className={styles['create-folder-dialog__error']}>
             <ErrorSVG />
             <p>
               Something went wrong!
@@ -98,7 +98,7 @@ const CreateFolderDialog: React.FC<CreateFolderDialogProps> = ({
             <Button
               isLoading={isLoading}
               type='submit'
-              className={classes['create-folder-dialog__submit']}
+              className={styles['create-folder-dialog__submit']}
             >
               Create Folder
             </Button>

@@ -4,7 +4,7 @@ import { FolderTreeInterface } from '../../types/folder-tree.types';
 
 import FolderTreeItem from './FolderTreeItem';
 
-import classes from './FolderTreeList.module.css';
+import styles from './FolderTreeList.module.css';
 
 type FolderTreeListProps = {
   className?: string;
@@ -17,7 +17,7 @@ const FolderTreeList: React.FC<FolderTreeListProps> = ({
 }) => {
   return (
     <ul
-      className={`${classes['folder-tree-list']} ${className ? className : ''}`}
+      className={`${styles['folder-tree-list']} ${className ? className : ''}`}
     >
       {folderTree.length > 0
         ? folderTree.map((folderNode) => (

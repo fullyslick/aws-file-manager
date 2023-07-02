@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Loader.module.css';
+import styles from './Loader.module.css';
 import { ReactComponent as LoaderSVGSmall } from '../../../assets/loader-s.svg';
 import { ReactComponent as LoaderSVG } from '../../../assets/loader-m.svg';
 
@@ -16,12 +16,12 @@ const Loader: React.FC<LoaderProps> = ({
     <>
       {size === 'regular' ? (
         <LoaderSVG
-          className={`${classes.loader} ${
-            color === 'black' ? classes['loader--black'] : ''
+          className={`${styles.loader} ${
+            color === 'black' ? styles['loader--black'] : ''
           }`}
         />
       ) : (
-        <LoaderSVGSmall className={classes.loader} />
+        <LoaderSVGSmall className={styles.loader} />
       )}
     </>
   );

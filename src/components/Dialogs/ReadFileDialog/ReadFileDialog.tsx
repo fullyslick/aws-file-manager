@@ -9,7 +9,7 @@ import { getObjectContent } from '../../../services/aws-methods';
 
 import { ReactComponent as ErrorSVG } from '../../../assets/error.svg';
 
-import classes from './ReadFileDialog.module.css';
+import styles from './ReadFileDialog.module.css';
 
 type ReadFileDialogProps = {
   isShown: boolean;
@@ -54,10 +54,10 @@ const ReadFileDialog: React.FC<ReadFileDialogProps> = ({
       <>
         {isLoading && <Loader color='black' />}
         {fileContent && (
-          <p className={classes['read-file-dialog__content']}>{fileContent}</p>
+          <p className={styles['read-file-dialog__content']}>{fileContent}</p>
         )}
         {hasError && (
-          <div className={classes['read-file-dialog__error']}>
+          <div className={styles['read-file-dialog__error']}>
             <ErrorSVG />
             <p>
               Something went wrong!

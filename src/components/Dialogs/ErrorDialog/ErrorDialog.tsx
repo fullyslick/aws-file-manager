@@ -4,7 +4,7 @@ import Modal from '../../UI/Modal/Modal';
 
 import { ReactComponent as ErrorSVG } from '../../../assets/error.svg';
 
-import classes from './ErrorDialog.module.css';
+import styles from './ErrorDialog.module.css';
 
 type ErrorDialogProps = {
   isShown: boolean;
@@ -19,7 +19,7 @@ const ErrorDialog: React.FC<ErrorDialogProps> = ({
 }: ErrorDialogProps) => {
   return (
     <Modal isShown={isShown} hide={toggle} headerText={headerText}>
-      <div className={classes['error-dialog']}>
+      <div className={styles['error-dialog']}>
         <ErrorSVG />
         <p>
           Something went wrong!

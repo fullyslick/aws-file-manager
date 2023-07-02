@@ -11,7 +11,7 @@ import useModal from '../../hooks/useModal';
 import { getS3Objects } from '../../services/aws-methods';
 
 import { BrowserNode } from '../../types/browser.types';
-import classes from './FileBrowser.module.css';
+import styles from './FileBrowser.module.css';
 
 type FileBrowserProps = {
   className?: string;
@@ -48,11 +48,11 @@ const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
   }, [workingDir, configData, lastModified, hasError, toggle]);
 
   return (
-    <div className={`${classes['file-browser']} ${className ? className : ''}`}>
+    <div className={`${styles['file-browser']} ${className ? className : ''}`}>
       {browserNodes.length !== 0 ? (
         <FileBrowserList browserNodes={browserNodes} />
       ) : (
-        <p className={classes['file-browser__empty-msg']}>
+        <p className={styles['file-browser__empty-msg']}>
           {hasError ? (
             <span>Failed to fetch</span>
           ) : (

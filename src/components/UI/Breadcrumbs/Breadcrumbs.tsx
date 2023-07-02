@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { WorkingDirContext } from '../../../contexts/WorkingDirContext';
 
 import { ReactComponent as RightArrowSVG } from '../../../assets/arrow-right-delimiter.svg';
-import classes from './Breadcrumbs.module.css';
+import styles from './Breadcrumbs.module.css';
 
 type BreadcrumbsProps = {
   className?: string;
@@ -50,17 +50,17 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
   };
 
   return (
-    <nav className={`${classes['breadcrumbs']} ${className ? className : ''}`}>
+    <nav className={`${styles['breadcrumbs']} ${className ? className : ''}`}>
       {breadcrumbs.length > 0 &&
         breadcrumbs.map((breadcrumb) => (
           <button
             key={breadcrumb.path}
-            className={classes['breadcrumb__item']}
+            className={styles['breadcrumb__item']}
             type='button'
             onClick={() => handleBreadcrumbNav(breadcrumb.path)}
           >
             {breadcrumb.name}
-            <RightArrowSVG className={classes['breadcrumb__item-icon']} />
+            <RightArrowSVG className={styles['breadcrumb__item-icon']} />
           </button>
         ))}
     </nav>

@@ -11,7 +11,7 @@ import { BrowserNode } from '../../types/browser.types';
 import { ReactComponent as FolderSVG } from '../../assets/folder.svg';
 import { ReactComponent as TextSVG } from '../../assets/text-doc.svg';
 
-import classes from './FileBrowserItem.module.css';
+import styles from './FileBrowserItem.module.css';
 
 const FileBrowserItem: React.FC<{
   browserNode: BrowserNode;
@@ -34,8 +34,8 @@ const FileBrowserItem: React.FC<{
     toggle();
   };
 
-  const itemClassName = `${classes['file-browser-item']} ${
-    isFolder ? classes['file-browser-item--folder'] : ''
+  const itemClassName = `${styles['file-browser-item']} ${
+    isFolder ? styles['file-browser-item--folder'] : ''
   } ${className ? className : ''}`;
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,9 +47,9 @@ const FileBrowserItem: React.FC<{
     return (
       <>
         {isFolder ? (
-          <FolderSVG className={classes['file-browser-item--icon']} />
+          <FolderSVG className={styles['file-browser-item--icon']} />
         ) : (
-          <TextSVG className={classes['file-browser-item--icon']} />
+          <TextSVG className={styles['file-browser-item--icon']} />
         )}
       </>
     );
@@ -58,13 +58,13 @@ const FileBrowserItem: React.FC<{
   return (
     <li className={itemClassName}>
       <input
-        className={classes['file-browser-item__checkbox']}
+        className={styles['file-browser-item__checkbox']}
         type='checkbox'
         name='browserItemCheckbox'
         onChange={handleCheckboxChange}
       />
       <button
-        className={classes['file-browser-item__link']}
+        className={styles['file-browser-item__link']}
         onClick={handleBrowserItemClick}
       >
         <FileIcon />

@@ -13,7 +13,7 @@ import { getFolderTree } from '../../services/aws-methods';
 
 import { FolderTreeInterface } from '../../types/folder-tree.types';
 
-import classes from './FolderTree.module.css';
+import styles from './FolderTree.module.css';
 
 type FolderTreeProps = {
   className?: string;
@@ -37,9 +37,7 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
   }, [lastModified, configData, toggle]);
 
   return (
-    <aside
-      className={`${classes['folder-tree']} ${className ? className : ''}`}
-    >
+    <aside className={`${styles['folder-tree']} ${className ? className : ''}`}>
       {hasError ? (
         <ErrorDialog
           isShown={hasError}
@@ -55,7 +53,7 @@ const FolderTree: React.FC<FolderTreeProps> = ({ className }) => {
               childFolders: [],
             }}
             isRoot={true}
-            className={classes['folder-tree__root-item']}
+            className={styles['folder-tree__root-item']}
           />
           <FolderTreeList folderTree={folderTree} />
         </ul>

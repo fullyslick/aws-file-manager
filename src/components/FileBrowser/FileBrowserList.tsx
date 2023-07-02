@@ -7,7 +7,7 @@ import { WorkingDirContext } from '../../contexts/WorkingDirContext';
 
 import { BrowserNodesInterface } from '../../types/browser.types';
 
-import classes from './FileBrowserList.module.css';
+import styles from './FileBrowserList.module.css';
 
 type BrowserListProps = {
   className?: string;
@@ -44,9 +44,7 @@ const BrowserList: React.FC<BrowserListProps> = ({
 
   return (
     <ul
-      className={`${classes['file-browser-list']} ${
-        className ? className : ''
-      }`}
+      className={`${styles['file-browser-list']} ${className ? className : ''}`}
     >
       {browserNodes.length > 0
         ? browserNodes.map((browserNode) => (

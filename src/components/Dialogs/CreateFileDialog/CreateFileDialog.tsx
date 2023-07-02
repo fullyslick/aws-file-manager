@@ -13,7 +13,7 @@ import { requiredFiled } from '../../../utils/validators';
 
 import { ReactComponent as ErrorSVG } from '../../../assets/error.svg';
 
-import classes from './CreateFileDialog.module.css';
+import styles from './CreateFileDialog.module.css';
 import TextArea from '../../UI/TextArea/TextArea';
 
 type CreateFileDialogProps = {
@@ -95,7 +95,7 @@ const CreateFileDialog: React.FC<CreateFileDialogProps> = ({
     >
       <>
         {hasError ? (
-          <div className={classes['create-file-dialog__error']}>
+          <div className={styles['create-file-dialog__error']}>
             <ErrorSVG />
             <p>
               Something went wrong!
@@ -123,7 +123,7 @@ const CreateFileDialog: React.FC<CreateFileDialogProps> = ({
             <Button
               isLoading={isLoading}
               type='submit'
-              className={classes['create-file-dialog__submit']}
+              className={styles['create-file-dialog__submit']}
             >
               Create File
             </Button>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Loader from '../Loader/Loader';
 
-import classes from './Button.module.css';
+import styles from './Button.module.css';
 
 type ButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -23,7 +23,7 @@ const Button: React.FC<ButtonProps> = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`${classes['button']} ${className ? className : ''}`}
+      className={`${styles['button']} ${className ? className : ''}`}
       type={type}
       onClick={onClick}
       disabled={disabled}

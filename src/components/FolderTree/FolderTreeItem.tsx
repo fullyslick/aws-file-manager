@@ -11,7 +11,7 @@ import { FolderNode } from '../../types/folder-tree.types';
 import { ReactComponent as StorageSVG } from '../../assets/cloud-storage.svg';
 import { ReactComponent as FolderSVG } from '../../assets/folder.svg';
 
-import classes from './FolderTreeItem.module.css';
+import styles from './FolderTreeItem.module.css';
 
 const FolderTreeItem: React.FC<{
   folderNode: FolderNode;
@@ -41,22 +41,22 @@ const FolderTreeItem: React.FC<{
     onDoubleClick: displayContent,
   });
 
-  const itemClassName = `${classes['folder-tree-list__item']} 
+  const itemClassName = `${styles['folder-tree-list__item']} 
   ${className ? className : ''}`;
 
-  const linkClassName = `${classes['folder-tree-list__item-btn']}
+  const linkClassName = `${styles['folder-tree-list__item-btn']}
   ${
     workingDir === path ||
     (!isExpanded && workingDir.startsWith(path) && !isRoot)
-      ? classes['folder-tree-list__item-btn--active']
+      ? styles['folder-tree-list__item-btn--active']
       : ''
   }
   ${
     childFolders.length > 0
-      ? classes['folder-tree-list__item-btn--expandable']
+      ? styles['folder-tree-list__item-btn--expandable']
       : ''
   }
-  ${isExpanded ? classes['folder-tree-list__item-btn--open'] : ''}
+  ${isExpanded ? styles['folder-tree-list__item-btn--open'] : ''}
   `;
 
   const Icon: React.FC = () => {
