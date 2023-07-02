@@ -19,7 +19,7 @@ const ErrorDialog: React.FC<ErrorDialogProps> = ({
 }: ErrorDialogProps) => {
   return (
     <Modal isShown={isShown} hide={toggle} headerText={headerText}>
-      <div className={styles['error-dialog']}>
+      <div className={styles.errorDialog}>
         <ErrorSVG />
         <p>
           Something went wrong!
