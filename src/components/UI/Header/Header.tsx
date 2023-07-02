@@ -16,19 +16,17 @@ const Header: React.FC = () => {
 
   return (
     <header className={styles.header}>
-      <div className={styles['header__logo-wrapper']}>
-        <LogoSVG className={styles['header__logo']} />
-        <h1 className={styles['header__logo-title']}>S3 Bucket Viewer</h1>
+      <div className={styles.headerLogoWrapper}>
+        <LogoSVG className={styles.headerLogo} />
+        <h1 className={styles.headerLogoTitle}>S3 Bucket Viewer</h1>
       </div>
-      <div className={styles['header-actions']}>
+      <div className={styles.headerActions}>
         <button
           onClick={handleDisconnect}
           type='button'
-          className={styles['header-actions__disconnect']}
+          className={styles.headerActionsDisconnect}
         >
-          <ServerCloseSVG
-            className={styles['header-actions__disconnect-icon']}
-          />
+          <ServerCloseSVG className={styles.headerActionsDisconnectIcon} />
           <span>Disconnect</span>
         </button>
       </div>
