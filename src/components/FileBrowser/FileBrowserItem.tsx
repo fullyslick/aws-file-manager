@@ -34,10 +34,6 @@ const FileBrowserItem: React.FC<{
     toggle();
   };
 
-  const itemClassName = `${styles['file-browser-item']} ${
-    isFolder ? styles['file-browser-item--folder'] : ''
-  } ${className ? className : ''}`;
-
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = event.target.checked;
     onCheckboxChange(isChecked, path);
@@ -47,24 +43,24 @@ const FileBrowserItem: React.FC<{
     return (
       <>
         {isFolder ? (
-          <FolderSVG className={styles['file-browser-item--icon']} />
+          <FolderSVG className={styles.fileBrowserItemIcon} />
         ) : (
-          <TextSVG className={styles['file-browser-item--icon']} />
+          <TextSVG className={styles.fileBrowserItemIcon} />
         )}
       </>
     );
   };
 
   return (
-    <li className={itemClassName}>
+    <li className={`${styles.fileBrowserItem} ${className ? className : ''}`}>
       <input
-        className={styles['file-browser-item__checkbox']}
+        className={styles.fileBrowserItemCheckbox}
         type='checkbox'
         name='browserItemCheckbox'
         onChange={handleCheckboxChange}
       />
       <button
-        className={styles['file-browser-item__link']}
+        className={styles.fileBrowserItemLink}
         onClick={handleBrowserItemClick}
       >
         <FileIcon />

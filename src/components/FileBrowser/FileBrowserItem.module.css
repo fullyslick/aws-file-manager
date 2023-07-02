@@ -1,27 +1,27 @@
-.file-browser-item {
+.fileBrowserItem {
   display: flex;
   flex-flow: row nowrap;
   background-color: var(--color-lucid-blue);
 }
 
-.file-browser-item:nth-child(2n) {
+.fileBrowserItem:nth-child(2n) {
   background-color: var(--color-white);
 }
 
-.file-browser-item:hover {
+.fileBrowserItem:hover {
   background-color: var(--color-grey-light);
 }
 
-.file-browser-item__checkbox {
+.fileBrowserItemCheckbox {
   height: 38px;
   margin: 0 16px;
 }
 
-.file-browser-item--icon {
+.fileBrowserItemIcon {
   display: inline-block;
 }
 
-.file-browser-item__link {
+.fileBrowserItemLink {
   flex-grow: 1;
   padding: 8px 16px 8px 4px;
   font-size: var(--font-size-m);
@@ -38,7 +38,7 @@
   cursor: pointer;
 }
 
-.file-browser-item__link span {
+.fileBrowserItemLink span {
   display: inline-block;
   width: 250px;
   white-space: nowrap;
@@ -47,13 +47,13 @@
 }
 
 @media screen and (min-width: 601px) {
-  .file-browser-item__link span {
+  .fileBrowserItemLink span {
     width: 300px;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  .file-browser-item__link span {
+  .fileBrowserItemLink span {
     width: 800px;
   }
 }
