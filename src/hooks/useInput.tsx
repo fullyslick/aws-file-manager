@@ -25,7 +25,7 @@ const useInput = ({ validation, validationError }: Validator) => {
     validateInput();
   }, [value, validateInput]);
 
-  // Prevents update of other inputs in the same parent
+  // Prevents update of other inputs in the same parent component
   const handleValueChange = useCallback(
     (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const inputValue = e.target.value;
