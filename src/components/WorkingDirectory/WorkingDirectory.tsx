@@ -13,9 +13,7 @@ type WorkingDirectoryProps = {
 const WorkingDirectory: React.FC<WorkingDirectoryProps> = ({ className }) => {
   return (
     <section
-      className={`${classes['working-directory']} ${
-        className ? className : ''
-      }`}
+      className={`${classes.workingDirectory} ${className ? className : ''}`}
     >
       <WorkingDirectoryActions />
       <Breadcrumbs />
