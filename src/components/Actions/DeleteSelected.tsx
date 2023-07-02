@@ -21,7 +21,7 @@ const DeleteSelected: React.FC<DeleteSelectedProps> = ({
   className,
 }: DeleteSelectedProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { selectedFiles } = useContext(SelectedFilesContext);
+  const { selectedFiles, setSelectedFiles } = useContext(SelectedFilesContext);
   const { configData } = useContext(ConfigContext);
   const { setLastModified } = useContext(WorkingDirContext);
 
@@ -33,6 +33,7 @@ const DeleteSelected: React.FC<DeleteSelectedProps> = ({
     setIsLoading(true);
     try {
       await deleteS3Objects(configData, selectedFiles);
+      setSelectedFiles([]);
       setLastModified(new Date().toISOString());
     } catch (error) {
       console.error(error);
