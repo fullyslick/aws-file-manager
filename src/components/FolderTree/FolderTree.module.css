@@ -1,19 +1,19 @@
-.folder-tree {
+.folderTree {
   overflow: auto;
   padding: 16px 0 0 16px;
   background-color: var(--color-lucid-blue);
 }
 
 @media screen and (min-width: 601px) {
-  .folder-tree::-webkit-scrollbar {
+  .folderTree::-webkit-scrollbar {
     width: 16px;
   }
 
-  .folder-tree::-webkit-scrollbar-track {
+  .folderTree::-webkit-scrollbar-track {
     background-color: var(--color-lucid-black);
   }
 
-  .folder-tree::-webkit-scrollbar-thumb {
+  .folderTree::-webkit-scrollbar-thumb {
     background: #5e5e5e;
     border-radius: 8px;
     box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25),
@@ -21,12 +21,12 @@
   }
 }
 
-.folder-tree__root-item {
+.folderTreeRootItem {
   font-size: var(--font-size-m);
   margin: 0 0 8px 0;
   padding: 0;
 }
 
-.folder-tree__root-item span {
+.folderTreeRootItem span {
   max-width: calc(100% - 40px);
 }
