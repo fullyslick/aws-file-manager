@@ -19,8 +19,11 @@ type FileBrowserProps = {
 
 const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
   const { workingDir, lastModified } = useContext(WorkingDirContext);
+
   const { configData } = useContext(ConfigContext);
+
   const [browserNodes, setBrowserNodes] = useState<BrowserNode[] | []>([]);
+
   const { isShown, toggle } = useModal();
 
   useEffect(() => {
@@ -42,11 +45,11 @@ const FileBrowser: React.FC<FileBrowserProps> = ({ className }) => {
   }, [workingDir, configData, lastModified, toggle]);
 
   return (
-    <div className={`${styles['file-browser']} ${className ? className : ''}`}>
+    <div className={`${styles.fileBrowser} ${className ? className : ''}`}>
       {browserNodes.length !== 0 ? (
         <FileBrowserList browserNodes={browserNodes} />
       ) : (
-        <p className={styles['file-browser__empty-msg']}>
+        <p className={styles.fileBrowserEmptyMsg}>
           <span>This folder is empty.</span>
         </p>
       )}
