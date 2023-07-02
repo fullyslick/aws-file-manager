@@ -5,7 +5,7 @@
   flex-flow: row wrap;
 }
 
-.breadcrumb__item {
+.breadcrumbItem {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -29,22 +29,22 @@
   cursor: pointer;
 }
 
-.breadcrumb__item:hover {
+.breadcrumbItem:hover {
   background-color: var(--color-grey-light);
   transition: background-color 0.3s;
 }
 
-.breadcrumb__item:last-of-type {
+.breadcrumbItem:last-of-type {
   padding: 4px 16px;
   background-color: var(--color-grey-light);
 }
-.breadcrumb__item-icon {
+.breadcrumbItemIcon {
   width: 10px;
   height: 10px;
   position: relative;
   top: 1px;
 }
 
-.breadcrumb__item:last-of-type .breadcrumb__item-icon {
+.breadcrumbItem:last-of-type .breadcrumbItemIcon {
   display: none;
 }

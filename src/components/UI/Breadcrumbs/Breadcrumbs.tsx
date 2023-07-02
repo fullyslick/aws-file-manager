@@ -50,17 +50,17 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ className }) => {
   };
 
   return (
-    <nav className={`${styles['breadcrumbs']} ${className ? className : ''}`}>
+    <nav className={`${styles.breadcrumbs} ${className ? className : ''}`}>
       {breadcrumbs.length > 0 &&
         breadcrumbs.map((breadcrumb) => (
           <button
             key={breadcrumb.path}
-            className={styles['breadcrumb__item']}
+            className={styles.breadcrumbItem}
             type='button'
             onClick={() => handleBreadcrumbNav(breadcrumb.path)}
           >
             {breadcrumb.name}
-            <RightArrowSVG className={styles['breadcrumb__item-icon']} />
+            <RightArrowSVG className={styles.breadcrumbItemIcon} />
           </button>
         ))}
     </nav>
