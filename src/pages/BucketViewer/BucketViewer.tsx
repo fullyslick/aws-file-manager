@@ -9,21 +9,19 @@ import WorkingDirectory from '../../components/WorkingDirectory/WorkingDirectory
 
 import useLeavePrompt from '../../hooks/useLeavePrompt';
 
-import classes from './BucketViewer.module.css';
+import styles from './BucketViewer.module.css';
 
 const BucketViewer: React.FC = () => {
   useLeavePrompt();
 
   return (
-    <div className={classes['bucketViewer']}>
+    <div className={styles.bucketViewer}>
       <Header />
-      <main className={classes['bucketViewerMain']}>
+      <main className={styles.bucketViewerMain}>
         <WorkingDirProvider>
-          <FolderTree className={classes['bucketViewerFolderTree']} />
+          <FolderTree className={styles.bucketViewerFolderTree} />
           <SelectedFilesProvider>
-            <WorkingDirectory
-              className={classes['bucketViewerWorkingDirectory']}
-            />
+            <WorkingDirectory className={styles.bucketViewerWorkingDirectory} />
           </SelectedFilesProvider>
         </WorkingDirProvider>
       </main>
