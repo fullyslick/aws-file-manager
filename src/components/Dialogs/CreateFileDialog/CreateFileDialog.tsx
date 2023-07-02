@@ -26,8 +26,11 @@ const CreateFileDialog: React.FC<CreateFileDialogProps> = ({
   toggle,
 }: CreateFileDialogProps) => {
   const { configData } = useContext(ConfigContext);
+
   const { workingDir, setLastModified } = useContext(WorkingDirContext);
+
   const [hasError, setHasError] = useState<boolean>(false);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
@@ -95,7 +98,7 @@ const CreateFileDialog: React.FC<CreateFileDialogProps> = ({
     >
       <>
         {hasError ? (
-          <div className={styles['create-file-dialog__error']}>
+          <div className={styles.createFileDialogError}>
             <ErrorSVG />
             <p>
               Something went wrong!
@@ -123,7 +126,7 @@ const CreateFileDialog: React.FC<CreateFileDialogProps> = ({
             <Button
               isLoading={isLoading}
               type='submit'
-              className={styles['create-file-dialog__submit']}
+              className={styles.createFileDialogSubmit}
             >
               Create File
             </Button>
