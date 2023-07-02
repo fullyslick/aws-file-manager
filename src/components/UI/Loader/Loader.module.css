@@ -6,6 +6,6 @@
   transform: translate(-50%, -50%);
 }
 
-.loader.loader--black {
+.loader.loaderBlack {
   filter: contrast(0) brightness(0.5);
 }
