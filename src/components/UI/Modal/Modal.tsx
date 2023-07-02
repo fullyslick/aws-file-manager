@@ -5,10 +5,10 @@ import FocusLock from 'react-focus-lock';
 
 import { ReactComponent as CloseSVG } from '../../../assets/close.svg';
 
-import classes from './Modal.module.css';
+import styles from './Modal.module.css';
 
 export interface ModalProps {
-  color?: 'white' | 'blue';
+  color?: 'White' | 'Blue';
   isShown: boolean;
   hide: () => void;
   headerText: string;
@@ -40,27 +40,27 @@ const Modal: React.FC<ModalProps> = ({
 
   const modal = (
     <React.Fragment>
-      <div className={classes['modal__backdrop']} onClick={hide}></div>
+      <div className={styles.modalBackdrop} onClick={hide}></div>
       <FocusLock>
         <div
-          className={classes['modal-wrapper']}
+          className={styles.modalWrapper}
           aria-modal
           aria-labelledby={headerText}
           tabIndex={-1}
           role='dialog'
         >
-          <div className={`${classes.modal} ${classes['modal--' + color]}`}>
-            <div className={classes['modal__header']}>
+          <div className={`${styles.modal} ${styles['modal' + color]}`}>
+            <div className={styles.modalHeader}>
               <span>{headerText}</span>
               <button
-                className={classes['modal__header-close-button']}
+                className={styles.modalHeaderCloseButton}
                 type='button'
                 onClick={hide}
               >
                 <CloseSVG />
               </button>
             </div>
-            <div className={classes['modal__content']}>{children}</div>
+            <div className={styles.modalContent}>{children}</div>
           </div>
         </div>
       </FocusLock>

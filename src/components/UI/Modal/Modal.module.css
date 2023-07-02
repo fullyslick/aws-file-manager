@@ -1,4 +1,4 @@
-.modal-wrapper {
+.modalWrapper {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -21,7 +21,7 @@
   }
 }
 
-.modal__backdrop {
+.modalBackdrop {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -46,11 +46,11 @@
   max-height: 80vh;
 }
 
-.modal.modal--blue {
+.modal.modalBlue {
   background-color: var(--color-lucid-blue);
 }
 
-.modal__header {
+.modalHeader {
   border-radius: 8px 8px 0 0;
   display: flex;
   justify-content: space-between;
@@ -62,21 +62,21 @@
   line-height: var(--line-height-l);
 }
 
-.modal__header span {
+.modalHeader span {
   margin-left: 8px;
 }
 
-.modal__header-close-button {
+.modalHeaderCloseButton {
   border: none;
   margin-left: 16px;
   background: none;
 }
 
-.modal__header-close-button:hover {
+.modalHeaderCloseButton:hover {
   cursor: pointer;
 }
 
-.modal__content {
+.modalContent {
   padding: 16px;
   overflow-x: hidden;
   overflow-y: auto;

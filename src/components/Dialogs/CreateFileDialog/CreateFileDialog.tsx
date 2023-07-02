@@ -91,7 +91,7 @@ const CreateFileDialog: React.FC<CreateFileDialogProps> = ({
       isShown={isShown}
       hide={toggle}
       headerText={'Create file'}
-      color='blue'
+      color='Blue'
     >
       <>
         {hasError ? (

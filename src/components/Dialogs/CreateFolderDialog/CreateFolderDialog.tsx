@@ -73,7 +73,7 @@ const CreateFolderDialog: React.FC<CreateFolderDialogProps> = ({
       isShown={isShown}
       hide={toggle}
       headerText={'Create folder'}
-      color='blue'
+      color='Blue'
     >
       <>
         {hasError ? (
