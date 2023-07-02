@@ -1,12 +1,16 @@
-import React from 'react';
-import './App.css';
+import React, { useContext } from 'react';
 
-function App() {
+import ConfigBucket from './pages/ConfigBucket/ConfigBucket';
+import BucketViewer from './pages/BucketViewer/BucketViewer';
+
+import { ConfigContext } from './contexts/ConfigContext';
+
+const App: React.FC = () => {
+  const { hasConfig } = useContext(ConfigContext);
+
   return (
-    <div className='App'>
-      <p>Hello World</p>
-    </div>
+    <div className='app'>{hasConfig ? <BucketViewer /> : <ConfigBucket />}</div>
   );
-}
+};
 
 export default App;

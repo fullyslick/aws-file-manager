@@ -1,0 +1,72 @@
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--color-lucid-black);
+  color: var(--color-white);
+}
+
+.headerLogoWrapper {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.headerLogo {
+  display: inline-block;
+  width: 20px;
+}
+
+@media screen and (min-width: 601px) {
+  .headerLogo {
+    width: 30px;
+  }
+}
+
+.headerLogoTitle {
+  display: inline-block;
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-s);
+  font-weight: normal;
+  color: var(--color-lucid-green);
+  margin: 0 0 0 8px;
+}
+
+@media screen and (min-width: 601px) {
+  .headerLogoTitle {
+    font-size: var(--font-size-l);
+  }
+}
+
+.headerActions {
+  display: inline-block;
+}
+
+.headerActionsDisconnect {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-white);
+  font-size: var(--font-size-m);
+  height: 100%;
+  transition: all 0.2s;
+}
+
+.headerActionsDisconnect:hover {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 1);
+}
+
+.headerActionsDisconnectIcon {
+  width: 16px;
+  margin-right: 8px;
+}
+
+@media screen and (min-width: 601px) {
+  .headerActionsDisconnectIcon {
+    width: 22px;
+  }
+}

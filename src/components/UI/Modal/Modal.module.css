@@ -1,0 +1,86 @@
+.modalWrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 700;
+  width: inherit;
+  outline: 0;
+  border: solid 2px var(--color-grey-light);
+  border-radius: 15px;
+  overflow: hidden;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.modalBackdrop {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 500;
+}
+
+.modal {
+  z-index: 100;
+  background: var(--color-white);
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  margin: auto;
+  border-radius: 8px;
+  transition: all 0.3s;
+  min-width: 320px;
+  max-width: 80vw;
+  min-height: 200px;
+  max-height: 80vh;
+}
+
+.modal.modalBlue {
+  background-color: var(--color-lucid-blue);
+}
+
+.modalHeader {
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 8px;
+  background: var(--color-lucid-black);
+  color: var(--color-white);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-l);
+}
+
+.modalHeader span {
+  margin-left: 8px;
+}
+
+.modalHeaderCloseButton {
+  border: none;
+  margin-left: 16px;
+  background: none;
+}
+
+.modalHeaderCloseButton:hover {
+  cursor: pointer;
+}
+
+.modalContent {
+  padding: 16px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  height: 100%;
+  flex-grow: 1;
+}

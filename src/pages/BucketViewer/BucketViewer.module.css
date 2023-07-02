@@ -1,0 +1,45 @@
+.bucketViewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bucketViewerMain {
+  overflow: hidden;
+  flex-grow: 1;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+@media screen and (min-width: 601px) {
+  .bucketViewerMain {
+    flex-wrap: nowrap;
+  }
+}
+
+.bucketViewerFolderTree {
+  width: 100%;
+  height: 30%;
+  border-bottom: solid 1px var(--color-grey-dark);
+}
+
+@media screen and (min-width: 601px) {
+  .bucketViewerFolderTree {
+    width: 30%;
+    height: 100%;
+    border-bottom: none;
+    border-right: solid 1px var(--color-grey-dark);
+  }
+}
+
+.bucketViewerWorkingDirectory {
+  width: 100%;
+  height: 70%;
+}
+
+@media screen and (min-width: 601px) {
+  .bucketViewerWorkingDirectory {
+    width: 70%;
+    height: 100%;
+  }
+}

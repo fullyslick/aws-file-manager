@@ -1,0 +1,70 @@
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  border: solid 2px var(--color-grey-light);
+  border-radius: 15px;
+  overflow: hidden;
+  position: absolute;
+  margin: 0 auto;
+  width: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (min-width: 601px) {
+  .wrapper {
+    max-width: 800px;
+  }
+}
+
+.branding {
+  width: 100%;
+  padding: 16px 40px;
+  background-color: var(--color-lucid-black);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 601px) {
+  .branding {
+    width: 40%;
+    padding: 40px;
+  }
+}
+
+.brandingLogoImage {
+  width: 40px;
+  margin: 0 auto;
+  display: block;
+}
+
+.brandingLogoTitle {
+  text-align: center;
+  color: var(--color-lucid-green);
+  margin: 10px auto;
+  font-size: var(--font-size-l);
+  line-height: var(--line-height-m);
+  font-weight: normal;
+}
+
+.brandingVersion {
+  text-align: center;
+  color: var(--color-white);
+  margin: 8px auto;
+  font-size: var(--font-size-s);
+  border-top: 1px solid var(--color-white);
+}
+
+.credentials {
+  width: 100%;
+  background-color: var(--color-lucid-blue);
+}
+
+@media screen and (min-width: 601px) {
+  .credentials {
+    width: 60%;
+  }
+}

@@ -1,0 +1,42 @@
+.button {
+  padding: 8px 16px;
+  font-size: var(--font-size-m);
+  color: var(--color-white);
+  background-color: var(--color-lucid-green-dark);
+  border: none;
+  border-radius: 5px;
+  line-height: 20px;
+  min-height: 34px;
+  min-width: 130px;
+  cursor: pointer;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px;
+  transition: all 0.3s;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 5px;
+  vertical-align: middle;
+}
+
+.button:focus,
+.button:hover {
+  outline: none;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px;
+}
+
+.button:hover {
+  background-color: var(--color-lucid-green-darkest);
+}
+
+.button:active {
+  box-shadow: unset;
+  transform: translateY(2px);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}

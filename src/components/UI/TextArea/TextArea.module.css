@@ -1,0 +1,39 @@
+.textarea {
+  border: solid 1px var(--color-grey-light);
+  padding: 8px;
+  font-size: var(--font-size-m);
+  width: 100%;
+  color: var(--color-grey-darkest);
+  min-height: 120px;
+}
+
+.textarea:focus {
+  outline: none;
+  border: solid 1px var(--color-grey-dark);
+}
+
+.textarea.textareaInvalid {
+  border-color: var(--color-red);
+}
+
+.textareaLabel {
+  color: var(--color-grey-darkest);
+  font-size: var(--font-size-s);
+  margin: 0;
+  display: block;
+}
+
+.textareaError {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  min-height: 24px;
+  color: var(--color-red);
+}
+
+.textarea:-webkit-autofill,
+.textarea:-webkit-autofill:focus,
+.textarea:-webkit-autofill:hover {
+  -webkit-text-fill-color: var(--color-grey-darkest);
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  font-size: var(--font-size-m);
+}

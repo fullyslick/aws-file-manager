@@ -1,0 +1,59 @@
+.fileBrowserItem {
+  display: flex;
+  flex-flow: row nowrap;
+  background-color: var(--color-lucid-blue);
+}
+
+.fileBrowserItem:nth-child(2n) {
+  background-color: var(--color-white);
+}
+
+.fileBrowserItem:hover {
+  background-color: var(--color-grey-light);
+}
+
+.fileBrowserItemCheckbox {
+  height: 38px;
+  margin: 0 16px;
+}
+
+.fileBrowserItemIcon {
+  display: inline-block;
+}
+
+.fileBrowserItemLink {
+  flex-grow: 1;
+  padding: 8px 16px 8px 4px;
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-l);
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--color-lucid-black);
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.fileBrowserItemLink span {
+  display: inline-block;
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 601px) {
+  .fileBrowserItemLink span {
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .fileBrowserItemLink span {
+    width: 800px;
+  }
+}
